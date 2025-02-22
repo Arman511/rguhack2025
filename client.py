@@ -107,31 +107,14 @@ def main():
 
         action = input("What would you like to do? ").strip().lower()
 
+        if action in possible_actions:
+            menus.main_actions(action)
+
         if action not in possible_actions:
             input(wrap_colour(ANSI_RED, "Invalid action - ENTER TO CONTINUE"))
             continue
 
-        elif action == "status":
-            input(f"Player health: {player.health} - PRESS ENTER TO CONTINUE")
-            continue
-
-        elif action == "quit":
-            print("Goodbye!")
-            return 0
-
-        elif action == "inventory":
-            input(player.got_items(), "- PRESS ENTER TO CONTINUE")
-            continue
-
-        elif action == "look":
-            input(current_room.description, "- PRESS ENTER TO CONTINUE")
-            continue
-
-        elif action == "help":
-            print("You can do the following actions: go, look, inventory, quit, help")
-            continue
-
-        elif action == "go":
+        if action == "go":
             possible_rooms = {
                 room.id: f"{room.id} - {room.name}"
                 for room in rooms

@@ -44,6 +44,11 @@ class Player:
     def change_room(self, room):
         self.current_room = room
 
-    def player_die(self):
-        input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
-        os.system("cls" if os.name == "nt" else "clear")
+    def player_minus_health(self, damage = 1):
+        self.health -= damage
+        if self.health <= 0:
+            input(
+                wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE")
+            )
+            os.system("cls" if os.name == "nt" else "clear")
+    
