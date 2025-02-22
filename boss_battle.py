@@ -2,7 +2,6 @@ import random
 from typing import Callable
 from colours import wrap_colour, ANSI_PURPLE
 from inspect import signature
-import playsound
 
 
 from challenge import (

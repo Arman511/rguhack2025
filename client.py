@@ -13,7 +13,7 @@ from colours import (
     # ANSI_CYAN,
     # ANSI_WHITE,
 )
-import playsound
+import pygame
 
 
 from menus import menus
@@ -130,14 +130,19 @@ def main():
             player.change_room(direction)
 
 
-musics = ["music/track1.mp3"]
+musics = ["music/track1.mp3", "music/track2.mp3"]
 
 if __name__ == "__main__":
 
     def play_music():
+        pygame.mixer.init()
+
         while True:
             track = random.choice(musics)
-            playsound.playsound(track)
+            pygame.mixer.music.load(track)
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy():
+                pygame.time.Clock().tick(10)
 
     music_thread = threading.Thread(target=play_music, daemon=True)
     music_thread.start()
