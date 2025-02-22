@@ -16,7 +16,7 @@ SUMBARINE_TOILET = Room(
 
 OIL_RIG_CORRIDOR = Room(
     "Oil Rig Corridor",
-    "You are in an oil rig corridor. It is dark and damp. You can hear the sound of water dripping.",
+    "You are now entering the oil rig console. The air begins to feel stuffy, a pungent smell violating your senses making you feel lightheaded. You encounter these odd rooms which identify themselves as different challenges, which one do you dare to enter?",
     2,
     previous_room=0,
 )
@@ -30,20 +30,20 @@ OIL_RIG_CONSOLE_ROOM = Room(
 
 OIL_RIG_RIDDLE_ROOM = Room(
     "Oil Rig Riddle Room",
-    "You are in the oil rig riddle room. It is dark and damp. You can hear the sound of water dripping.",
+    "You are in the oil rig riddle room. Guess the word while gaining hints from your wrong answers.",
     4,
     previous_room=2,
 )
 
 OIL_RIG_HANGMAN_ROOM = Room(
     "Oil Rig Hangman Room",
-    "You are in the oil rig hangman room. It is dark and damp. You can hear the sound of water dripping.",
+    "You are in the oil rig hangman room. Guess the word before the human dies.",
     5,
     previous_room=2,
 )
 OIL_RIG_WORDLE_ROOM = Room(
     "Oil Rig Wordle Room",
-    "You are in the oil rig engine room. It is dark and damp. You can hear the sound of water dripping.",
+    "You are in the oil rig engine room. Guess the word while gaining hints from your wrong answers.",
     6,
     previous_room=2,
 )
