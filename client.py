@@ -25,6 +25,7 @@ rooms = get_rooms()
 challenge_rooms = [3, 4, 5, 6]
 key_not_in_room = random.choice(challenge_rooms)
 keys = [f"Key {i}" for i in range(1, 4)]
+done_rooms = []
 
 
 def main():
@@ -49,7 +50,12 @@ def main():
             passed = challenge(current_room.id)
             if not passed:
                 player.player_minus_health()
-                print(wrap_colour(ANSI_PURPLE, "In the last second you escape with your life and the room reset mysteriously",))
+                print(
+                    wrap_colour(
+                        ANSI_PURPLE,
+                        "In the last second you escape with your life and the room reset mysteriously",
+                    )
+                )
                 continue
 
             elif passed == "EXIT":
@@ -60,6 +66,7 @@ def main():
                 player.add_item(keys.pop())
                 print(wrap_colour(ANSI_BLUE, "You got a key!"))
 
+            done_rooms.append(current_room.id)
             print(wrap_colour(ANSI_PURPLE, "You SURVIVED"))
             player.current_room = 2
 
@@ -104,7 +111,9 @@ def main():
             possible_rooms = {
                 room.id: f"{room.id} - {room.name}"
                 for room in rooms
-                if room.can_enter_room(player) and player.current_room != room.id
+                if room.can_enter_room(player)
+                and player.current_room != room.id
+                and room.id not in done_rooms
             }
             print(wrap_colour(ANSI_BLUE, "Possible rooms: "))
             for room in possible_rooms.values():
@@ -128,7 +137,7 @@ if __name__ == "__main__":
         try:
             main()
         except SystemExit:
-            ans = input("Enter Y to play again")
+            ans = input("Enter Y to play again: ")
             if ans.lower() != "y":
                 break
 
