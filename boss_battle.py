@@ -1,6 +1,8 @@
 import random
-from player import Player
-from colours import wrap_colour, ANSI_RED, ANSI_PURPLE
+from typing import Callable
+from colours import wrap_colour, ANSI_PURPLE
+from inspect import signature
+
 from challenge import (
     console_challenge,
     riddle_challenge,
@@ -9,8 +11,7 @@ from challenge import (
     cipher_challenge,
 )
 
-
-challenges = [
+challenges: list[Callable[[], bool]] = [
     console_challenge,
     riddle_challenge,
     wordle_challenge,
@@ -19,15 +20,20 @@ challenges = [
 ]
 
 
-def boss_room(player: Player):
+def call_challenge(challenge_func):
+    params = signature(challenge_func).parameters
+    if "can_exit" in params:
+        return challenge_func(can_exit=False)
+    return challenge_func()
+
+
+def boss_room():
     print(wrap_colour(ANSI_PURPLE, "As you enter the room you notice"))
     random.shuffle(challenges)
 
-    chal1 = challenges.pop()
+    for _ in range(3):  # Pick three challenges
+        chal = challenges.pop()
+        if not call_challenge(chal):
+            return False
 
-    passed = chal1()
-
-    if not passed:
-        player.player_minus_health(9999)
-
-    pass
+    return True
