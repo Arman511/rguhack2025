@@ -46,13 +46,8 @@ def main():
         if current_room.id in challenge_rooms:
             passed = challenge(current_room.id)
             if not passed:
-                if player.health == 1:
-                    input(
-                        wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE")
-                    )
-                    os.system("cls" if os.name == "nt" else "clear")
-                    player = Player(username)
-                    player.current_room = 0
+                if player.health == 0:
+                    player.player_die()
                 else:
                     print(
                         wrap_colour(

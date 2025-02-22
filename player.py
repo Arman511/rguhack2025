@@ -1,3 +1,4 @@
+import os
 class Player:
     def __init__(self, name):
         self.name = name
@@ -38,3 +39,11 @@ class Player:
 
     def change_room(self, room):
         self.current_room = room
+
+    def player_die(self):
+        input(
+            wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE")
+        )
+        os.system("cls" if os.name == "nt" else "clear")
+        player = Player(username)
+        player.current_room = 0
