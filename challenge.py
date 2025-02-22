@@ -5,10 +5,10 @@ from utils.wordle import wordle_response
 import random
 import time
 
-with open("rguhack2025/utils/data/all_answers.csv") as f:
+with open("utils/data/all_answers.csv") as f:
     ANSWER_LIST = [line.strip() for line in f]
 
-with open("rguhack2025/utils/data/all_guess.csv") as f:
+with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
 
 
@@ -362,15 +362,9 @@ def hangman_challenge():
 
 
 def wordle_challenge():
-    # get the wordle data from utils/all_answers.csv and all_guess.csv
-    with open("rguhack2025/utils/data/all_answers.csv") as f:
-        answer_list = [line.strip() for line in f]
-
-    with open("rguhack2025/utils/data/all_guess.csv") as f:
-        guess_set = {line.strip() for line in f}
 
     # pick a random wordle answer
-    answer = random.choice(answer_list)
+    answer = random.choice(ANSWER_LIST)
     attempts_remaining = 6
 
     print(
@@ -383,7 +377,7 @@ def wordle_challenge():
     for attempt in range(6):
         print(f"Guesses remaining: {attempts_remaining}")
         user_guess = input("Enter your guess: ").strip().lower()
-        if user_guess not in guess_set:
+        if user_guess not in GUESS_SET:
             print(wrap_colour(ANSI_RED, "Invalid guess, try again"))
             continue
         response = wordle_response(answer, user_guess)
