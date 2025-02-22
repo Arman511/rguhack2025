@@ -76,28 +76,11 @@ def main():
 
         action = input("What would you like to do? ").strip().lower()
 
+        if action in possible_actions:
+            menus.main_actions(action)
+
         if action not in possible_actions:
             print("Invalid action")
-            continue
-
-        if action == "status":
-            input(f"Player health: {player.health} - PRESS ENTER TO CONTINUE")
-            continue
-
-        if action == "quit":
-            print("Goodbye!")
-            return 0
-
-        if action == "inventory":
-            input(player.got_items(), "- PRESS ENTER TO CONTINUE")
-            continue
-
-        if action == "look":
-            input(current_room.description, "- PRESS ENTER TO CONTINUE")
-            continue
-
-        if action == "help":
-            print("You can do the following actions: go, look, inventory, quit, help")
             continue
 
         if action == "go":

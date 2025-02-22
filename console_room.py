@@ -9,8 +9,10 @@ while True:
         print(current_room.description)
 
         if current_room.id in challenge_rooms:
-             if health == 0:
-                  player_death()
+            if player.health == 0:
+                player_death()
+            else:
+                
 def console_room(player: Player):
     print("You enter a room echoing with the sound of beeps and boops, you smell oil and copper")
 
