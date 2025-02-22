@@ -49,8 +49,7 @@ def main():
             if not passed:
                 player.player_minus_health()
                 if player.health <= 0:
-                    player = Player(username)
-                    player.current_room = 0
+                    continue
                 else:
                     print(
                         wrap_colour(
@@ -138,4 +137,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except SystemExit:
+            ans = input("Enter Y to play again")
+            if ans.lower() != "y":
+                break
+
+    print("Goodbye!")
