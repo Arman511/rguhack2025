@@ -1,6 +1,6 @@
-
 from colours import ANSI_RED, wrap_colour, ANSI_BLUE, ANSI_GREEN, ANSI_YELLOW
 from utils.wordle import wordle_response
+
 # import pandas as pd
 import random
 import time
@@ -43,129 +43,179 @@ class Riddle:
 
 riddles = [
     Riddle(
-        "Why did the Microsoft Java developer need glasses?",
-        "C#",
-        ["C#", "Java", "Python", "Ruby"],
+        "I have keys but open no locks. I have space but no room. You can enter, but you can’t go outside. What am I?",
+        "Keyboard",
+        ["Keyboard", "Safe", "Puzzle Box", "Server"],
     ),
     Riddle(
-        "I am a data structure that follows First-In-First-Out (FIFO). What am I?",
-        "Queue",
-        ["Stack", "Queue", "Heap", "Tree"],
+        "The more you take from me, the bigger I become. What am I?",
+        "Memory Leak",
+        ["Memory Leak", "Hard Drive", "Database", "Cache"],
     ),
     Riddle(
-        "Which computer science term is also the name of a crime?",
-        "Hacking",
-        ["Phishing", "Hacking", "DDoS", "Brute Force"],
+        "I can be solid, liquid, or gas, but I’m not a state of matter. In tech, I can crash, but I’m not a car. What am I?",
+        "Cloud",
+        ["Cloud", "RAM", "Binary", "Algorithm"],
     ),
     Riddle(
-        "I can store a lot of information, but I forget everything when the power is off. What am I?",
-        "RAM",
-        ["RAM", "SSD", "HDD", "Cache"],
+        "I speak without a mouth, but I am heard. I am stored, but I take up no space. What am I?",
+        "Data",
+        ["Data", "Echo", "Soundwave", "Electricity"],
     ),
     Riddle(
-        "Which sorting algorithm repeatedly divides the list into smaller parts?",
-        "Merge Sort",
-        ["Bubble Sort", "Quick Sort", "Merge Sort", "Selection Sort"],
+        "I can be inserted but never removed. I grow but never shrink. What am I?",
+        "Blockchain",
+        ["Blockchain", "USB Drive", "Memory Stick", "Log File"],
     ),
     Riddle(
-        "Which programming language is named after a comedy group?",
-        "Python",
-        ["Java", "C++", "Python", "Ruby"],
+        "I follow you everywhere on the internet, yet I leave no footprints. What am I?",
+        "Cookie",
+        ["Cookie", "VPN", "IP Address", "Incognito Mode"],
     ),
     Riddle(
-        "I translate high-level code into machine code. What am I?",
-        "Compiler",
-        ["Compiler", "Interpreter", "Assembler", "Debugger"],
+        "I have an eye but cannot see. I help store memories but have no mind. What am I?",
+        "Camera",
+        ["Camera", "RAM", "Hard Drive", "Sensor"],
     ),
     Riddle(
-        "What does HTML stand for?",
-        "HyperText Markup Language",
-        [
-            "HyperText Markup Language",
-            "High Tech Machine Learning",
-            "HyperText Management Language",
-            "HyperTransfer Markup Language",
-        ],
+        "You can fill me with numbers, words, or even colors, but I always have rows and columns. What am I?",
+        "Spreadsheet",
+        ["Spreadsheet", "Database", "Chart", "Code Editor"],
     ),
     Riddle(
-        "Which programming language is used for developing Android apps?",
-        "Java",
-        ["C#", "Python", "Java", "Swift"],
+        "I start at zero and count up, but only as long as you need me. What am I?",
+        "Loop",
+        ["Loop", "Index", "Counter", "Function"],
     ),
     Riddle(
-        "Which is faster: O(1) or O(n)?",
-        "O(1)",
-        ["O(1)", "O(n)", "O(n^2)", "O(log n)"],
+        "I get shorter as I grow older, but I’m not alive. What am I?",
+        "Battery",
+        ["Battery", "Timer", "Cache", "Stack"],
     ),
     Riddle(
-        "Which HTTP status code represents 'Not Found'?",
-        "404",
-        ["200", "403", "404", "500"],
+        "I come in packets, but I’m not food. I travel fast, but I have no legs. What am I?",
+        "Data",
+        ["Data", "Email", "Electricity", "VPN"],
     ),
     Riddle(
-        "I am the father of the C programming language. Who am I?",
-        "Dennis Ritchie",
-        ["Dennis Ritchie", "James Gosling", "Bjarne Stroustrup", "Guido van Rossum"],
+        "I disappear the moment you say my name. What am I?",
+        "Silence",
+        ["Silence", "Bug", "Echo", "Error"],
     ),
     Riddle(
-        "Which symbol is commonly used to indicate a pointer in C?",
-        "*",
-        ["*", "&", "->", "#"],
+        "I connect billions of people, yet I am invisible. What am I?",
+        "Internet",
+        ["Internet", "Wi-Fi", "Bluetooth", "Satellite"],
     ),
     Riddle(
-        "What does SQL stand for?",
-        "Structured Query Language",
-        [
-            "Structured Query Language",
-            "Simple Query Logic",
-            "Standard Query Layout",
-            "System Query Language",
-        ],
+        "I can be high or low, but I always come in bits. What am I?",
+        "Bandwidth",
+        ["Bandwidth", "Bitrate", "Resolution", "Signal Strength"],
     ),
     Riddle(
-        "I am a loop that never stops. What am I called?",
-        "Infinite Loop",
-        ["Infinite Loop", "For Loop", "While Loop", "Recursion"],
+        "I can be found in phones, cars, and even fridges. I help things run, but I don’t have legs. What am I?",
+        "Operating System",
+        ["Operating System", "AI", "Processor", "Battery"],
     ),
     Riddle(
-        "Which Boolean operator returns True if both inputs are True?",
-        "AND",
-        ["AND", "OR", "XOR", "NOT"],
+        "I can have bugs but not be alive. I can be updated but never grow. What am I?",
+        "Software",
+        ["Software", "Code", "App", "Hardware"],
     ),
     Riddle(
-        "Which data structure works based on Last-In-First-Out (LIFO)?",
-        "Stack",
-        ["Queue", "Stack", "Heap", "Graph"],
+        "I may have a spine but no bones. You can read me, but I have no voice. What am I?",
+        "Book",
+        ["Book", "Server Rack", "Database", "Archive"],
     ),
     Riddle(
-        "Which protocol is used to send emails?",
-        "SMTP",
-        ["HTTP", "FTP", "SMTP", "IMAP"],
+        "I am used to make calls but have no voice. I can crash but not break. What am I?",
+        "App",
+        ["App", "Phone", "VoIP", "Signal"],
     ),
     Riddle(
-        "Which company created the Java programming language?",
-        "Sun Microsystems",
-        ["Sun Microsystems", "Microsoft", "Google", "Apple"],
+        "I travel the world while staying in one spot. What am I?",
+        "Website",
+        ["Website", "Wi-Fi Router", "Satellite", "Email"],
     ),
     Riddle(
-        "Which programming language is known for its indentation-based syntax?",
-        "Python",
-        ["Python", "Java", "C++", "Swift"],
+        "I have windows but no glass. I sometimes crash but I’m not a car. What am I?",
+        "Operating System",
+        ["Operating System", "Browser", "Monitor", "Server"],
     ),
     Riddle(
-        "Which algorithm is used to find the shortest path in a graph?",
-        "Dijkstra’s Algorithm",
-        [
-            "Dijkstra’s Algorithm",
-            "Binary Search",
-            "Depth-First Search",
-            "Prim’s Algorithm",
-        ],
+        "I can be physical or virtual, but I always help you get from one place to another. What am I?",
+        "Router",
+        ["Router", "Map", "Cable", "Server"],
     ),
     Riddle(
-        "Which logic gate returns True only if both inputs are different?",
-        "XOR",
-        ["AND", "OR", "NAND", "XOR"],
+        "I store knowledge, but I’m not a library. I can be searched, but I’m not the internet. What am I?",
+        "Database",
+        ["Database", "Cloud", "Hard Drive", "Dictionary"],
+    ),
+    Riddle(
+        "I go up, but I never come down. In tech, people always want me higher. What am I?",
+        "Uptime",
+        ["Uptime", "Bandwidth", "Ping", "Stock Price"],
+    ),
+    Riddle(
+        "I can be found in games and code, but I am not alive. I’m something developers try to remove. What am I?",
+        "Bug",
+        ["Bug", "Glitch", "Easter Egg", "Patch"],
+    ),
+    Riddle(
+        "I travel at the speed of light but can be stopped by walls. What am I?",
+        "Wi-Fi",
+        ["Wi-Fi", "Fiber Optics", "Bluetooth", "Electricity"],
+    ),
+    Riddle(
+        "I exist in ones and zeros, but I can create entire worlds. What am I?",
+        "Binary Code",
+        ["Binary Code", "AI", "Algorithm", "Quantum Computer"],
+    ),
+    Riddle(
+        "I can be moved forward, backward, or deleted, but I never physically exist. What am I?",
+        "Cursor",
+        ["Cursor", "File", "Process", "Memory"],
+    ),
+    Riddle(
+        "I can be phishing but never in the water. I can be spam but never eaten. What am I?",
+        "Cyber Attack",
+        ["Cyber Attack", "Hacker", "Firewall", "Trojan"],
+    ),
+    Riddle(
+        "I get weaker the farther I travel, but I carry information everywhere. What am I?",
+        "Signal",
+        ["Signal", "Battery", "Sound Wave", "Ping"],
+    ),
+    Riddle(
+        "You can hear me but never see me. I can be a phone, a speaker, or a notification. What am I?",
+        "Sound",
+        ["Sound", "Radio", "Mic", "Alarm"],
+    ),
+    Riddle(
+        "I always listen but never speak. I can wake up when you call my name. What am I?",
+        "Smart Assistant",
+        ["Smart Assistant", "Microphone", "Server", "AI"],
+    ),
+    Riddle(
+        "I can control many devices but have no physical form. I help turn things on but can’t hold anything. What am I?",
+        "Remote Control",
+        ["Remote Control", "Bluetooth", "Wi-Fi", "Cloud"],
+    ),
+    Riddle(
+        "I have a head and a tail but no body. What am I?",
+        "Coin",
+        ["Coin", "Bit", "Pointer", "Queue"],
+    ),
+    Riddle(
+        "I can crash, but I am not a plane. I can freeze, but I am not ice. What am I?",
+        "Computer",
+        ["Computer", "Software", "Server", "Game"],
+    ),
+    Riddle(
+        "I help you reach new places, but I don’t move. I make connections but have no emotions. What am I?",
+        "Network",
+        ["Network", "Browser", "Cable", "AI"],
     ),
 ]
 
@@ -203,7 +253,6 @@ def riddle_challenge():
         return True
     print(wrap_colour(ANSI_RED, "The laser fires and you die"))
     return False
-
 
 
 def hangman_challenge():
@@ -289,7 +338,12 @@ def hangman_challenge():
         print(wrap_colour(ANSI_YELLOW, stages[mistakes]))
         print(wrap_colour(ANSI_GREEN, "Word: " + " ".join(display)))
         if "_" not in display:
-            print(wrap_colour(ANSI_BLUE, "You survived! The noose disappears and the door unlocks."))
+            print(
+                wrap_colour(
+                    ANSI_BLUE,
+                    "You survived! The noose disappears and the door unlocks.",
+                )
+            )
             return True
         guess = input(wrap_colour(ANSI_YELLOW, "Guess a letter: ")).upper()
         if guess in secret:
@@ -299,9 +353,12 @@ def hangman_challenge():
 
     print(wrap_colour(ANSI_RED, stages[mistakes]))
     print(wrap_colour(ANSI_RED, "Word: " + secret))
-    print(wrap_colour(ANSI_RED, "You got hanged! The noose tightens and everything goes dark."))
+    print(
+        wrap_colour(
+            ANSI_RED, "You got hanged! The noose tightens and everything goes dark."
+        )
+    )
     return False
-
 
 
 def wordle_challenge():
@@ -339,29 +396,46 @@ def wordle_challenge():
                 print(wrap_colour(ANSI_GREEN, char.upper()), end=" ")
         print()
         if response == "22222":
-            print(wrap_colour(ANSI_BLUE, "Success! The mystical voice booms: 'You have guessed the correct word.'"))
+            print(
+                wrap_colour(
+                    ANSI_BLUE,
+                    "Success! The mystical voice booms: 'You have guessed the correct word.'",
+                )
+            )
             return True
         attempts_remaining -= 1
 
-    print(wrap_colour(ANSI_RED, "You failed. The mystical voice whispers: 'The correct answer was:'"), wrap_colour(ANSI_GREEN, answer.upper()))
+    print(
+        wrap_colour(
+            ANSI_RED,
+            "You failed. The mystical voice whispers: 'The correct answer was:'",
+        ),
+        wrap_colour(ANSI_GREEN, answer.upper()),
+    )
     return False
 
+
 def quick_maths_challenge():
-    operations = ['+', '-', '*']
+    operations = ["+", "-", "*"]
     num_questions = 5
     time_limit = 5  # seconds
 
-    print(wrap_colour(ANSI_BLUE, "You step into the chamber of quick maths. A booming voice declares: 'Solve these problems swiftly, or face the wrath of the ancient guardians!'"))
+    print(
+        wrap_colour(
+            ANSI_BLUE,
+            "You step into the chamber of quick maths. A booming voice declares: 'Solve these problems swiftly, or face the wrath of the ancient guardians!'",
+        )
+    )
 
     for _ in range(num_questions):
         num1 = random.randint(10, 99)
         num2 = random.randint(10, 99)
         operation = random.choice(operations)
-        
-        if operation == '*':
+
+        if operation == "*":
             num1 = random.randint(1, 12)
             num2 = random.randint(1, 12)
-        
+
         question = f"{num1} {operation} {num2}"
         answer = eval(question)
 
@@ -371,7 +445,12 @@ def quick_maths_challenge():
         end_time = time.time()
 
         if end_time - start_time > time_limit:
-            print(wrap_colour(ANSI_RED, "Time's up! The guardians awaken and you are engulfed in darkness."))
+            print(
+                wrap_colour(
+                    ANSI_RED,
+                    "Time's up! The guardians awaken and you are engulfed in darkness.",
+                )
+            )
             return False
 
         try:
@@ -381,8 +460,17 @@ def quick_maths_challenge():
             return False
 
         if user_answer != answer:
-            print(wrap_colour(ANSI_RED, "Wrong answer! The ground trembles as the guardians stir."))
+            print(
+                wrap_colour(
+                    ANSI_RED, "Wrong answer! The ground trembles as the guardians stir."
+                )
+            )
             return False
 
-    print(wrap_colour(ANSI_BLUE, "Congratulations! You have appeased the guardians with your swift and accurate calculations. The path ahead is clear."))
+    print(
+        wrap_colour(
+            ANSI_BLUE,
+            "Congratulations! You have appeased the guardians with your swift and accurate calculations. The path ahead is clear.",
+        )
+    )
     return True
