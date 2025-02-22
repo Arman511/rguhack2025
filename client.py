@@ -14,6 +14,7 @@ from colours import (
     # ANSI_WHITE,
 )
 
+from menus import menus
 from player import Player
 from room_manager import get_rooms
 import os
@@ -107,7 +108,7 @@ def main():
         action = input("What would you like to do? ").strip().lower()
 
         if action in possible_actions:
-            menus.main_actions(action)
+            menus.main_actions(action, player, current_room)
 
         if action not in possible_actions:
             input(wrap_colour(ANSI_RED, "Invalid action - ENTER TO CONTINUE"))
