@@ -28,6 +28,10 @@ keys = [f"Key {i}" for i in range(1, 4)]
 done_rooms = []
 
 
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
+
 def main():
     print(wrap_colour(ANSI_RED, "MISSION: FIX OIL RIG"))
 
