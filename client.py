@@ -20,7 +20,7 @@ import os
 player = None
 
 rooms = get_rooms()
-challenge_rooms = [3, 4, 5, 6]
+challenge_rooms = [3, 4, 5]
 key_not_in_room = random.choice(challenge_rooms)
 keys = [f"Key {i}" for i in range(1, 4)]
 
@@ -35,7 +35,7 @@ def main():
         username = username.strip()
 
     player = Player(username)
-    possible_actions = ["go", "look", "inventory", "quit"]
+    possible_actions = ["go", "look", "inventory", "quit", "help"]
 
     while True:
         print("\n")
@@ -75,6 +75,10 @@ def main():
 
         if action == "look":
             print(current_room.description)
+            continue
+
+        if action == "help":
+            print("You can do the following actions: go, look, inventory, quit, help")
             continue
 
         if action == "go":
