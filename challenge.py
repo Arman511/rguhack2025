@@ -20,10 +20,8 @@ with open("utils/data/all_answers.csv") as f:
 with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
 
-EVENT_CHANCES = {"type_fast": 0.1, "cat": 0.1, "dog": 0.1}
-ITEM_DROP = {"meat": 0.1, "lasagna": 0.05}
-
-
+EVENT_CHANCES = {"type_fast":0.1, "cat":0.1, "dog":0.1, "eldritch":0.7}
+ITEM_DROP = {"meat":0.1, "lasagna":0.05}
 def item_draw(player: Player):
     print()
     items = list(ITEM_DROP.keys())
@@ -60,6 +58,8 @@ def random_event(player: Player):
         cat_event(player)
     elif chosen_event == "dog":
         dog_event(player)
+    elif chosen_event == "eldritch":
+        eldritch_event(player)
     else:
         print(wrap_colour(ANSI_RED, "Error: Unknown event."))
 
@@ -647,6 +647,49 @@ def dog_event(player: Player):
     return True
 
 
+def eldritch_event(player: Player):
+    # eldritch horror man stuck in the wall RPG diaglogue
+    print(
+        wrap_colour(
+            ANSI_BLUE,
+            "You find yourself in a dimly lit chamber, the walls are covered in strange runes and symbols. A figure appears before you, its form shifting and writhing as if it were made of shadows and mist."
+        )
+    )
+    print(
+        wrap_colour(
+            ANSI_RED,
+            "The fates control all. As will I. Shall we see what yours beholds?"
+        )
+    )
+    print(wrap_colour(ANSI_BLUE, "The figure offers you a choice: 'Heads or Tails?'"))
+    choice = input("Choose heads or tails: ").strip().lower()
+    if choice not in ["heads", "tails"]:
+        print(wrap_colour(ANSI_RED, "Invalid choice! The figure frowns."))
+        player.player_minus_health()
+
+    flip_result = random.choice(["heads", "tails"])
+    print(wrap_colour(ANSI_YELLOW, f"The coin flips... It lands on {flip_result}."))
+
+    if choice == flip_result:
+        print(
+            wrap_colour(
+                ANSI_GREEN,
+                "The figure nods slowly, and the shadows around it begin to dissipate. 'You have chosen wisely. The Fates have taken liking to you. (You double your health)'"
+            )
+        )
+        player.health *= 2
+        return 
+    else:
+        print(
+            wrap_colour(
+                ANSI_RED,
+                "The figure's eyes glow with a malevolent light. 'You are a pathetic worm. Suffer your puny existence. (Your health is halved)'"
+            )
+        )
+        player.health = 2 if player.health // 2 < 2 else player.health // 2
+        player.player_minus_health()
+        return 
+    
 def base64_cipher(text):
     encoded = base64.b64encode(text.encode()).decode()
     return encoded
