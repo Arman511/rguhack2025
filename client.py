@@ -153,5 +153,8 @@ if __name__ == "__main__":
             ans = input("Enter Y to play again: ")
             if ans.lower() != "y":
                 break
+        except KeyboardInterrupt:
+            break
 
+    music_thread.join()
     print("Goodbye!")
