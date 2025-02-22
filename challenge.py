@@ -1,4 +1,11 @@
-from colours import ANSI_RED, wrap_colour, ANSI_BLUE, ANSI_GREEN, ANSI_YELLOW, ANSI_PURPLE
+from colours import (
+    ANSI_RED,
+    wrap_colour,
+    ANSI_BLUE,
+    ANSI_GREEN,
+    ANSI_YELLOW,
+    ANSI_PURPLE,
+)
 from utils.wordle import wordle_response
 from player import Player
 # import pandas as pd
@@ -508,27 +515,27 @@ def type_fast_event(player: Player):
         "duck": {
             "problem": f"{wrap_colour(ANSI_BLUE, 'Arrows whiz overhead! Type')} '{wrap_colour(ANSI_PURPLE, 'duck')}' {wrap_colour(ANSI_BLUE, 'to avoid them!')}",
             "success": "You duck just in time, and the arrows harmlessly pass above you!",
-            "failure": "You tried to {action}, but an arrow pierces you because you needed to duck!"
+            "failure": "You tried to {action}, but an arrow pierces you because you needed to duck!",
         },
         "hide": {
             "problem": f"{wrap_colour(ANSI_BLUE, 'A patrol is closing in! Type')} '{wrap_colour(ANSI_PURPLE, 'hide')}' {wrap_colour(ANSI_BLUE, 'to stay unseen!')}",
             "success": "You melt into the shadows, escaping their notice!",
-            "failure": "You tried to {action}, but you're spotted because you needed to hide!"
+            "failure": "You tried to {action}, but you're spotted because you needed to hide!",
         },
         "hit": {
             "problem": f"{wrap_colour(ANSI_BLUE, 'A goblin rushes at you! Type')} '{wrap_colour(ANSI_PURPLE, 'hit')}' {wrap_colour(ANSI_BLUE, 'to strike first!')}",
             "success": "You land a swift blow and the goblin collapses!",
-            "failure": "You tried to {action}, but the goblin lands a hit on you first!"
+            "failure": "You tried to {action}, but the goblin lands a hit on you first!",
         },
         "jump": {
             "problem": f"{wrap_colour(ANSI_BLUE, 'The ground crumbles beneath you! Type')} '{wrap_colour(ANSI_PURPLE, 'jump')}' {wrap_colour(ANSI_BLUE, 'to leap to safety!')}",
             "success": "You jump just in time and avoid the collapsing floor!",
-            "failure": "You tried to {action}, but you plunge down because you needed to jump!"
+            "failure": "You tried to {action}, but you plunge down because you needed to jump!",
         },
         "guard": {
             "problem": f"{wrap_colour(ANSI_BLUE, 'An arrow speeds your way! Type')} '{wrap_colour(ANSI_PURPLE, 'guard')}' {wrap_colour(ANSI_BLUE, 'to defend!')}",
             "success": "You raise your shield in the nick of time, deflecting the arrow!",
-            "failure": "You tried to {action}, leaving you wide open! The arrow strikes you down!"
+            "failure": "You tried to {action}, leaving you wide open! The arrow strikes you down!",
         },
     }
     time_limit = 10
