@@ -55,8 +55,17 @@ def main():
             passed = challenge(current_room.id)
             if not passed:
                 player.player_minus_health()
-                print(wrap_colour(ANSI_PURPLE, "In the last second you escape with your life and the room reset mysteriously",))
-                input(wrap_colour(ANSI_RED, "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE"))
+                print(
+                    wrap_colour(
+                        ANSI_PURPLE,
+                        "In the last second you escape with your life and the room reset mysteriously",
+                    )
+                )
+                input(
+                    wrap_colour(
+                        ANSI_RED, "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE"
+                    )
+                )
                 continue
 
             elif passed == "EXIT":
