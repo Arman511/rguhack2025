@@ -3,6 +3,7 @@ class Player:
         self.name = name
         self.score = 0
         self.karma = 0
+        self.health = 3
         with open("items.txt", "r") as f:
             self.inventory = {line.strip(): 0 for line in f}
 
