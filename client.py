@@ -13,11 +13,14 @@ from colours import (
     # ANSI_CYAN,
     # ANSI_WHITE,
 )
+import playsound
+
 
 from menus import menus
 from player import Player
 from room_manager import get_rooms
 import os
+import threading
 
 player = None
 
@@ -127,7 +130,17 @@ def main():
             player.change_room(direction)
 
 
+musics = ["music/track1.mp3"]
+
 if __name__ == "__main__":
+
+    def play_music():
+        while True:
+            track = random.choice(musics)
+            playsound.playsound(track)
+
+    music_thread = threading.Thread(target=play_music, daemon=True)
+    music_thread.start()
     while True:
         try:
             main()

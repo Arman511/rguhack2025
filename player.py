@@ -1,6 +1,6 @@
 import os
 
-from colours import *
+from colours import ANSI_RED, wrap_colour
 
 
 class Player:
