@@ -83,32 +83,14 @@ def main():
             player.current_room = 2
 
         elif current_room.id == rooms[-1].id:
-            result = boss_room(player)
+            result = boss_room()
 
             if not result:
                 input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
-                os.system("cls" if os.name == "nt" else "clear")
-                player = Player(username)
-                player.current_room = 0
-                continue
-            input(wrap_colour(ANSI_GREEN, "\n\nYOU WIN - PRESS ENTER TO CONTINUE"))
-            ans = ""
-            while True:
-                ans = input("Do you wanna play again (Y/n)").strip().lower()
-                os.system("cls" if os.name == "nt" else "clear")
-                player = Player(username)
-                player.current_room = 0
-                if ans == "n":
-                    break
-                if not ans or ans == "Y":
-                    ans = "Y"
-                    break
-                input(wrap_colour(ANSI_RED, "Invalid action - ENTER TO CONTINUE"))
-
-            if ans == "Y":
-                continue
             else:
-                return
+                input(wrap_colour(ANSI_GREEN, "\n\nYOU WIN - PRESS ENTER TO CONTINUE"))
+            os.system("cls" if os.name == "nt" else "clear")
+            raise SystemExit
 
         action = input("What would you like to do? ").strip().lower()
 

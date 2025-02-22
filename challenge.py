@@ -33,7 +33,13 @@ def item_draw(player: Player):
 
     if chosen_item:
         player.add_item_to_inventory(chosen_item)
-        print(wrap_colour(ANSI_GREEN, f"You found a {chosen_item}! It has been added to your inventory."))
+        print(
+            wrap_colour(
+                ANSI_GREEN,
+                f"You found a {chosen_item}! It has been added to your inventory.",
+            )
+        )
+
 
 def random_event(player: Player):
     print()

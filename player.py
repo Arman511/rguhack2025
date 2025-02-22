@@ -14,7 +14,7 @@ class Player:
             for line in f:
                 item = line.strip()
                 if item in self.inventory:
-                    self.inventory[item] +1
+                    self.inventory[item] + 1
                 else:
                     self.inventory[item] = 1
 
