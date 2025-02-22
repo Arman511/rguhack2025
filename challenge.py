@@ -8,6 +8,7 @@ from colours import (
 )
 from utils.wordle import wordle_response
 from player import Player
+import base64
 
 # import pandas as pd
 import random
@@ -312,7 +313,7 @@ riddles = [
 ]
 
 
-def riddle_challenge():
+def riddle_challenge(can_exit=True):
     riddle = random.choice(riddles)
     print(
         wrap_colour(
@@ -320,7 +321,8 @@ def riddle_challenge():
             "You enter the riddle room, there is machine displaying a riddle with a chest thats locked, with a laser pointing at your head",
         )
     )
-    print(wrap_colour(ANSI_GREEN, "TYPE EXIT TO BACK TO CORRIDOR"))
+    if can_exit:
+        print(wrap_colour(ANSI_GREEN, "TYPE EXIT TO BACK TO CORRIDOR"))
     print(riddle.riddle)
     print("Options")
     shuffled = riddle.options[:]
@@ -330,7 +332,7 @@ def riddle_challenge():
     ans = -1
     while ans < 0 or ans > len(shuffled) - 1:
         ans = input("Enter option: ").strip()
-        if ans.lower() == "exit":
+        if ans.lower() == "exit" and can_exit:
             return "EXIT"
         try:
             ans = int(ans)
@@ -350,7 +352,7 @@ def riddle_challenge():
     return False
 
 
-def hangman_challenge():
+def hangman_challenge(can_exit=True):
     stages = [
         """
             +---+
@@ -443,7 +445,7 @@ def hangman_challenge():
         guess = input(
             wrap_colour(ANSI_YELLOW, "Guess a letter(Press exit to exit): ")
         ).upper()
-        if guess.lower() == "exit":
+        if guess.lower() == "exit" and can_exit:
             return "EXIT"
         if guess in secret:
             guessed.add(guess)
@@ -460,7 +462,7 @@ def hangman_challenge():
     return False
 
 
-def wordle_challenge():
+def wordle_challenge(can_exit=True):
     # pick a random wordle answer
     answer = random.choice(ANSWER_LIST)
     attempts_remaining = 6
@@ -474,12 +476,15 @@ def wordle_challenge():
 
     for attempt in range(6):
         print(f"Guesses remaining: {attempts_remaining}")
-        user_guess = (
-            input("Enter your guess(type exit to return to the corridor): ")
-            .strip()
-            .lower()
-        )
-        if user_guess == "exit":
+        if can_exit:
+            user_guess = (
+                input("Enter your guess(type exit to return to the corridor): ")
+                .strip()
+                .lower()
+            )
+        else:
+            user_guess = input("Enter your guess: ").strip().lower()
+        if user_guess == "exit" and can_exit:
             return "EXIT"
         if user_guess not in GUESS_SET:
             print(wrap_colour(ANSI_RED, "Invalid guess, try again"))
@@ -619,3 +624,139 @@ def dog_event(player: Player):
             wrap_colour(ANSI_RED, "The dog growls and leaves, leaving you as you were.")
         )
     return True
+
+
+def base64_cipher(text):
+    encoded = base64.b64encode(text.encode()).decode()
+    return encoded
+
+
+def caesar_cipher(text, shift=3):
+    result = ""
+    for char in text:
+        if char.isalpha():
+            shift_amount = shift % 26
+            new_char = chr(((ord(char.lower()) - 97 + shift_amount) % 26) + 97)
+            result += new_char.upper() if char.isupper() else new_char
+        else:
+            result += char
+    return result
+
+
+def binary_cipher(text):
+    return " ".join(format(ord(char), "08b") for char in text)
+
+
+def morse_cipher(text):
+    morse_dict = {
+        "A": ".-",
+        "B": "-...",
+        "C": "-.-.",
+        "D": "-..",
+        "E": ".",
+        "F": "..-.",
+        "G": "--.",
+        "H": "....",
+        "I": "..",
+        "J": ".---",
+        "K": "-.-",
+        "L": ".-..",
+        "M": "--",
+        "N": "-.",
+        "O": "---",
+        "P": ".--.",
+        "Q": "--.-",
+        "R": ".-.",
+        "S": "...",
+        "T": "-",
+        "U": "..-",
+        "V": "...-",
+        "W": ".--",
+        "X": "-..-",
+        "Y": "-.--",
+        "Z": "--..",
+        "0": "-----",
+        "1": ".----",
+        "2": "..---",
+        "3": "...--",
+        "4": "....-",
+        "5": ".....",
+        "6": "-....",
+        "7": "--...",
+        "8": "---..",
+        "9": "----.",
+        " ": "/",
+    }
+    return " ".join(morse_dict[char] for char in text.upper() if char in morse_dict)
+
+
+def cipher_challenge(can_exit=False):
+    ciphers = ["Base64", "Caesar Shift", "Binary", "Morse Code"]
+    chosen_cipher = random.choice(ciphers)
+    message = random.choice(ANSWER_LIST)
+    encoded_message = ""
+    print(
+        wrap_colour(
+            ANSI_BLUE,
+            "You step into a dimly lit chamber. Runes cover the walls, and a glowing inscription appears before you: 'Decipher the code to proceed!'",
+        )
+    )
+
+    if chosen_cipher == "Base64":
+        encoded_message = base64_cipher(message)
+        print(
+            wrap_colour(
+                ANSI_GREEN, f"The inscription is encoded in Base64: {encoded_message}"
+            )
+        )
+    elif chosen_cipher == "Caesar Shift":
+        encoded_message = caesar_cipher(message)
+        print(
+            wrap_colour(
+                ANSI_GREEN,
+                f"The inscription is written in a shifted alphabet: {encoded_message}",
+            )
+        )
+    elif chosen_cipher == "Binary":
+        encoded_message = binary_cipher(message)
+        print(
+            wrap_colour(
+                ANSI_GREEN,
+                f"The inscription consists of only 0s and 1s: {encoded_message}",
+            )
+        )
+    elif chosen_cipher == "Morse Code":
+        encoded_message = morse_cipher(message)
+        print(
+            wrap_colour(
+                ANSI_GREEN, f"Dots and dashes form the inscription: {encoded_message}"
+            )
+        )
+    if can_exit:
+        print(
+            wrap_colour(
+                ANSI_YELLOW, "Can you decode the message in time(type exit to exit)?"
+            )
+        )
+    else:
+        print(wrap_colour(ANSI_YELLOW, "Can you decode the message in time?"))
+
+    answer = input("Enter the decoded message: ").strip()
+    if answer.lower() == "exit" and can_exit:
+        return "EXIT"
+    if answer == message:
+        print(
+            wrap_colour(
+                ANSI_BLUE,
+                "The runes glow brightly, and the chamber door opens before you.",
+            )
+        )
+        return True
+
+    print(
+        wrap_colour(
+            ANSI_RED,
+            "The runes flicker and fade, and the walls enclode",
+        )
+    )
+    return False

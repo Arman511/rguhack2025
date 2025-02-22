@@ -25,7 +25,6 @@ rooms = get_rooms()
 challenge_rooms = [3, 4, 5, 6]
 key_not_in_room = random.choice(challenge_rooms)
 keys = [f"Key {i}" for i in range(1, 4)]
-done_rooms = []
 
 
 def clear():
@@ -37,6 +36,7 @@ def main():
 
     username = ""
     global player
+    done_rooms = set()
     while not username:
         username = input("Enter your username: ")
         username = username.strip()
@@ -51,6 +51,7 @@ def main():
         print(current_room.description)
 
         if current_room.id in challenge_rooms:
+            done_rooms.add(0)
             random_event(player)
             passed = challenge(current_room.id)
             if not passed:
@@ -76,7 +77,7 @@ def main():
                 player.add_item(keys.pop())
                 print(wrap_colour(ANSI_BLUE, "You got a key!"))
 
-            done_rooms.append(current_room.id)
+            done_rooms.add(current_room.id)
             print(wrap_colour(ANSI_PURPLE, "You SURVIVED"))
             player.current_room = 2
 
