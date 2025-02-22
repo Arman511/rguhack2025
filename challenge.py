@@ -282,9 +282,10 @@ def riddle_challenge():
     print(
         wrap_colour(
             ANSI_BLUE,
-            "You enter the riddle room, there is machine displaying a riddle, with  a laser pointing at your head, you hear the door lock behind you",
+            "You enter the riddle room, there is machine displaying a riddle with a chest thats locked, with a laser pointing at your head",
         )
     )
+    print(wrap_colour(ANSI_GREEN, "TYPE EXIT TO BACK TO CORRIDOR"))
     print(riddle.riddle)
     print("Options")
     shuffled = riddle.options[:]
@@ -294,6 +295,8 @@ def riddle_challenge():
     ans = -1
     while ans < 0 or ans > len(shuffled) - 1:
         ans = input("Enter option: ").strip()
+        if ans.lower() == "exit":
+            return "EXIT"
         try:
             ans = int(ans)
         except Exception:

@@ -56,7 +56,7 @@ def main():
                 else:
                     print(
                         wrap_colour(
-                            ANSI_RED,
+                            ANSI_PURPLE,
                             "In the last second you escape with your life and the room reset mysteriously",
                         )
                     )
@@ -66,6 +66,10 @@ def main():
                             "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE",
                         )
                     )
+                continue
+
+            if passed == "EXIT":
+                player.current_room = 2
                 continue
 
             if current_room.id != key_not_in_room:
