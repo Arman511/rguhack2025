@@ -308,7 +308,7 @@ def riddle_challenge():
     if riddle.answer == shuffled[ans]:
         print(wrap_colour(ANSI_BLUE, "The laser turns off and the door unlocks"))
         return True
-    print(wrap_colour(ANSI_RED, "The laser fires and you die"))
+    print(wrap_colour(ANSI_RED, "The laser fires..."))
     return False
 
 

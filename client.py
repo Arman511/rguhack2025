@@ -46,10 +46,26 @@ def main():
         if current_room.id in challenge_rooms:
             passed = challenge(current_room.id)
             if not passed:
-                input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
-                os.system("cls" if os.name == "nt" else "clear")
-                player = Player(username)
-                player.current_room = 0
+                if player.health == 1:
+                    input(
+                        wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE")
+                    )
+                    os.system("cls" if os.name == "nt" else "clear")
+                    player = Player(username)
+                    player.current_room = 0
+                else:
+                    print(
+                        wrap_colour(
+                            ANSI_RED,
+                            "In the last second you escape with your life and the room reset mysteriously",
+                        )
+                    )
+                    input(
+                        wrap_colour(
+                            ANSI_RED,
+                            "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE",
+                        )
+                    )
                 continue
 
             if current_room.id != key_not_in_room:
