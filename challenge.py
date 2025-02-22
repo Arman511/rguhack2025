@@ -15,13 +15,13 @@ with open("utils/data/all_guess.csv") as f:
 def challenge(challenge_id):
     match challenge_id:
         case 3:
-            console_challenge()
+            return console_challenge()
         case 4:
-            riddle_challenge()
+            return riddle_challenge()
         case 5:
-            hangman_challenge()
+            return hangman_challenge()
         case 6:
-            wordle_challenge()
+            return wordle_challenge()
         case _:
             raise ValueError("Invalid challenge ID")
 
