@@ -52,7 +52,11 @@ def console_challenge():
 
         print(wrap_colour(ANSI_YELLOW, f"Solve: {question}"))
         start_time = time.time()
-        user_answer = input("Your answer: ").strip()
+        user_answer = input(
+            "Your answer(type exit to return to the corridor): "
+        ).strip()
+        if user_answer.lower() == "exit":
+            return "EXIT"
         end_time = time.time()
 
         if end_time - start_time > time_limit:
