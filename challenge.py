@@ -481,7 +481,7 @@ def wordle_challenge():
     )
     return False
 
-def quick_time_event():
+def type_fast_event():
     actions = ["duck", "hide", "hit", "jump", "guard"]
     action_dialogues = {
         "duck": {
@@ -533,3 +533,4 @@ def quick_time_event():
             )
         )
         return False
+
