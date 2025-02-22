@@ -47,23 +47,18 @@ def main():
         if current_room.id in challenge_rooms:
             passed = challenge(current_room.id)
             if not passed:
-                if player.health <= 0:
-                    player.player_die()
-                    player = Player(username)
-                    player.current_room = 0
-                else:
-                    print(
-                        wrap_colour(
-                            ANSI_PURPLE,
-                            "In the last second you escape with your life and the room reset mysteriously",
-                        )
+                print(
+                    wrap_colour(
+                        ANSI_PURPLE,
+                        "In the last second you escape with your life and the room reset mysteriously",
                     )
-                    input(
-                        wrap_colour(
-                            ANSI_RED,
-                            "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE",
-                        )
+                )
+                input(
+                    wrap_colour(
+                        ANSI_RED,
+                        "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE",
                     )
+                )
                 continue
 
             if passed == "EXIT":
