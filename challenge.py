@@ -45,5 +45,9 @@ def hangman_challenge():
     pass
 
 
+def world_challenge():
+    pass
+
+
 def quick_maths_challenge():
     pass
