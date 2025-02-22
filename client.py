@@ -15,6 +15,7 @@ from colours import (
 
 from player import Player
 from room_manager import get_rooms
+import os
 
 player = None
 
@@ -45,7 +46,9 @@ def main():
         if current_room.id in challenge_rooms:
             passed = challenge(current_room.id)
             if not passed:
-                print(wrap_colour(ANSI_RED, "You died"))
+                input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
+                os.system("cls" if os.name == "nt" else "clear")
+                player = Player(username)
                 player.current_room = 0
                 continue
 
