@@ -1,4 +1,8 @@
 import os
+
+from colours import ANSI_RED, wrap_colour
+
+
 class Player:
     def __init__(self, name):
         self.name = name
@@ -41,9 +45,5 @@ class Player:
         self.current_room = room
 
     def player_die(self):
-        input(
-            wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE")
-        )
+        input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
         os.system("cls" if os.name == "nt" else "clear")
-        player = Player(username)
-        player.current_room = 0

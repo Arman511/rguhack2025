@@ -49,6 +49,8 @@ def main():
             if not passed:
                 if player.health <= 0:
                     player.player_die()
+                    player = Player(username)
+                    player.current_room = 0
                 else:
                     print(
                         wrap_colour(
