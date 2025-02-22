@@ -25,4 +25,9 @@ def boss_room(player: Player):
 
     chal1 = challenges.pop()
 
+    passed = chal1()
+
+    if not passed:
+        player.player_minus_health(9999)
+
     pass
