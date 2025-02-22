@@ -4,6 +4,13 @@ from utils.wordle import wordle_response
 # import pandas as pd
 import random
 
+with open("rguhack2025/utils/data/all_answers.csv") as f:
+    ANSWER_LIST = [line.strip() for line in f]
+
+with open("rguhack2025/utils/data/all_guess.csv") as f:
+    GUESS_SET = {line.strip() for line in f}
+
+
 def challenge(challenge_id):
     match challenge_id:
         case 3:
@@ -197,8 +204,103 @@ def riddle_challenge():
     return False
 
 
+
 def hangman_challenge():
-    pass
+    stages = [
+        """
+            +---+
+            |   |
+                |
+                |
+                |
+                |
+            =========
+        """,
+        """
+            +---+
+            |   |
+            O   |
+                |
+                |
+                |
+            =========
+        """,
+        """
+            +---+
+            |   |
+            O   |
+            |   |
+                |
+                |
+            =========
+        """,
+        """
+            +---+
+            |   |
+            O   |
+            /|   |
+                |
+                |
+            =========
+        """,
+        """
+            +---+
+            |   |
+            O   |
+            /|\\  |
+                |
+                |
+            =========
+        """,
+        """
+            +---+
+            |   |
+            O   |
+            /|\\  |
+            /    |
+                |
+            =========
+        """,
+        """
+            +---+
+            |   |
+            O   |
+            /|\\  |
+            / \\  |
+                |
+            =========
+        """,
+    ]
+
+    secret = random.choice(ANSWER_LIST).upper()
+    guessed = set()
+    mistakes = 0
+
+    print(
+        wrap_colour(
+            ANSI_BLUE,
+            "You find yourself in a dark room with a noose hanging from the ceiling. A voice echoes: 'Guess the word or face the gallows!'",
+        )
+    )
+
+    while mistakes < len(stages) - 1:
+        display = [c if c in guessed else "_" for c in secret]
+        print(wrap_colour(ANSI_YELLOW, stages[mistakes]))
+        print(wrap_colour(ANSI_GREEN, "Word: " + " ".join(display)))
+        if "_" not in display:
+            print(wrap_colour(ANSI_BLUE, "You survived! The noose disappears and the door unlocks."))
+            return True
+        guess = input(wrap_colour(ANSI_YELLOW, "Guess a letter: ")).upper()
+        if guess in secret:
+            guessed.add(guess)
+        else:
+            mistakes += 1
+
+    print(wrap_colour(ANSI_RED, stages[mistakes]))
+    print(wrap_colour(ANSI_RED, "Word: " + secret))
+    print(wrap_colour(ANSI_RED, "You got hanged! The noose tightens and everything goes dark."))
+    return False
+
 
 
 def wordle_challenge():
@@ -246,3 +348,5 @@ def wordle_challenge():
 
 def quick_maths_challenge():
     pass
+
+hangman_challenge()
