@@ -6,7 +6,7 @@ class Player:
         with open("items.txt", "r") as f:
             self.inventory = {line.strip(): 0 for line in f}
 
-        self.history = {}
+        self.current_room = 0
 
     def add_score(self, score):
         self.score += score
@@ -31,3 +31,9 @@ class Player:
 
     def got_items(self):
         return [item for item in self.inventory if self.inventory[item] == 1]
+
+    def get_current_room(self):
+        return self.current_room
+
+    def change_room(self, room):
+        self.current_room = room

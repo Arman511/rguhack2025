@@ -1,12 +1,12 @@
-ANSI_RESET = "\u001B[0m"
-ANSI_BLACK = "\u001B[30m"
-ANSI_RED = "\u001B[31m"
-ANSI_GREEN = "\u001B[32m"
-ANSI_YELLOW = "\u001B[33m"
-ANSI_BLUE = "\u001B[34m"
-ANSI_PURPLE = "\u001B[35m"
-ANSI_CYAN = "\u001B[36m"
-ANSI_WHITE = "\u001B[37m"
+ANSI_RESET = "\u001b[0m"
+ANSI_BLACK = "\u001b[30m"
+ANSI_RED = "\u001b[31m"
+ANSI_GREEN = "\u001b[32m"
+ANSI_YELLOW = "\u001b[33m"
+ANSI_BLUE = "\u001b[34m"
+ANSI_PURPLE = "\u001b[35m"
+ANSI_CYAN = "\u001b[36m"
+ANSI_WHITE = "\u001b[37m"
 
 
 def wrap_colour(colour, text):

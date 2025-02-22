@@ -1,10 +1,10 @@
 class Room:
 
-    def __init__(self, name, description, id):
+    def __init__(self, name, description, id, previous_room=None):
         self.name = name
         self.description = description
         self.id = id
-        self.paths = {}
+        self.previous_room = previous_room
         self.requirements = []
 
     def go(self, direction):
@@ -12,3 +12,16 @@ class Room:
 
     def add_paths(self, paths):
         self.paths.update(paths)
+
+    def can_enter_room(self, player):
+        for requirement in self.requirements:
+            if (
+                requirement in player.inventory
+                and player.inventory[requirement] > 0
+                and player.current_room == self.previous_room
+            ):
+                return True
+        return False
+
+    def add_requirment(self, item):
+        self.requirements.append(item)
