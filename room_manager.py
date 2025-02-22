@@ -41,6 +41,12 @@ OIL_RIG_HANGMAN_ROOM = Room(
     5,
     previous_room=2,
 )
+OIL_RIG_WORDLE_ROOM = Room(
+    "Oil Rig Wordle Room",
+    "You are in the oil rig engine room. It is dark and damp. You can hear the sound of water dripping.",
+    6,
+    previous_room=2,
+)
 
 OIL_RIG_ENGINE_ROOM = Room(
     "Oil Rig Engine Room",
@@ -62,5 +68,6 @@ def get_rooms():
         OIL_RIG_CONSOLE_ROOM,
         OIL_RIG_RIDDLE_ROOM,
         OIL_RIG_HANGMAN_ROOM,
+        OIL_RIG_WORDLE_ROOM,
         OIL_RIG_ENGINE_ROOM,
     ]
