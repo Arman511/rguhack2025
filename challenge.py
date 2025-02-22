@@ -1,4 +1,4 @@
-import requests
+import random
 from colours import ANSI_RED, wrap_colour, ANSI_BLUE
 
 
@@ -21,10 +21,10 @@ def console_challenge():
 
 
 def riddle_challenge():
-    request = requests.get("https://riddles-api-eight.vercel.app/science")
-    data = request.json()
-    riddle = data["riddle"]
-    answer = data["answer"].lower()
+    riddles = [("Why did the microsoft java dev need glasses", "C#"), ("", [])]
+    riddle = random.choice(riddles)
+    riddle = riddle[0]
+    answer = riddle[1]
     print(
         wrap_colour(
             ANSI_BLUE,
@@ -33,7 +33,7 @@ def riddle_challenge():
     )
     print(riddle)
     user_answer = input("What is your answer? ").strip().lower()
-    if user_answer == answer:
+    if user_answer == answer or user_answer in answer:
         print(wrap_colour(ANSI_BLUE, "The laser turns off and the door unlocks"))
         return True
     else:

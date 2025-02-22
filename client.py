@@ -1,5 +1,5 @@
 import random
-import challenge
+from challenge import challenge
 from colours import (
     wrap_colour,
     ANSI_RED,
@@ -39,11 +39,11 @@ def main():
     while True:
         print("\n")
         current_room = rooms[player.get_current_room()]
-        print("Current room: ", wrap_colour(ANSI_RED, current_room.name))
+        print("Current room:", wrap_colour(ANSI_RED, current_room.name))
         print(current_room.description)
 
         if current_room.id in challenge_rooms:
-            passed = challenge(current_room)
+            passed = challenge(current_room.id)
             if not passed:
                 print(wrap_colour(ANSI_RED, "You died"))
                 player.current_room = 0
@@ -76,9 +76,9 @@ def main():
 
         if action == "go":
             possible_rooms = {
-                room.room_id: f"{room.room_id} - {room.name}"
+                room.id: f"{room.id} - {room.name}"
                 for room in rooms
-                if room.can_enter_room(player)
+                if room.can_enter_room(player) and player.current_room != room.id
             }
             print(wrap_colour(ANSI_BLUE, "Possible rooms: "))
             for room in possible_rooms.values():
