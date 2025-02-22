@@ -8,7 +8,7 @@ from colours import (
     # ANSI_GREEN,
     # ANSI_YELLOW,
     ANSI_BLUE,
-    # ANSI_PURPLE,
+    ANSI_PURPLE,
     # ANSI_CYAN,
     # ANSI_WHITE,
 )
@@ -46,11 +46,15 @@ def main():
             passed = challenge(current_room)
             if not passed:
                 print(wrap_colour(ANSI_RED, "You died"))
-                current_room = rooms[0]
+                player.current_room = 0
                 continue
 
             if current_room.id != key_not_in_room:
-                player.add_item(f"Key {current_room.id}")
+                player.add_item(keys.pop())
+                print(wrap_colour(ANSI_BLUE, "You got a key!"))
+
+            print(wrap_colour(ANSI_PURPLE, "You SURVIVED"))
+            player.current_room = 2
 
         action = input("What would you like to do? ").strip().lower()
 
