@@ -405,7 +405,11 @@ def hangman_challenge():
                 )
             )
             return True
-        guess = input(wrap_colour(ANSI_YELLOW, "Guess a letter: ")).upper()
+        guess = input(
+            wrap_colour(ANSI_YELLOW, "Guess a letter(Press exit to exit): ")
+        ).upper()
+        if guess.lower() == "exit":
+            return "EXIT"
         if guess in secret:
             guessed.add(guess)
         else:
@@ -436,7 +440,13 @@ def wordle_challenge():
 
     for attempt in range(6):
         print(f"Guesses remaining: {attempts_remaining}")
-        user_guess = input("Enter your guess: ").strip().lower()
+        user_guess = (
+            input("Enter your guess(type exit to return to the corridor): ")
+            .strip()
+            .lower()
+        )
+        if user_guess == "exit":
+            return "EXIT"
         if user_guess not in GUESS_SET:
             print(wrap_colour(ANSI_RED, "Invalid guess, try again"))
             continue
