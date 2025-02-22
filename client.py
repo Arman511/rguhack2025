@@ -35,7 +35,7 @@ def main():
         username = username.strip()
 
     player = Player(username)
-    possible_actions = ["go", "look", "inventory", "quit", "help"]
+    possible_actions = ["go", "look", "inventory", "quit", "status", "help"]
 
     while True:
         print("\n")
@@ -51,7 +51,7 @@ def main():
                 else:
                     print(
                         wrap_colour(
-                            ANSI_RED,
+                            ANSI_PURPLE,
                             "In the last second you escape with your life and the room reset mysteriously",
                         )
                     )
@@ -61,6 +61,10 @@ def main():
                             "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE",
                         )
                     )
+                continue
+
+            if passed == "EXIT":
+                player.current_room = 2
                 continue
 
             if current_room.id != key_not_in_room:
@@ -76,16 +80,20 @@ def main():
             print("Invalid action")
             continue
 
+        if action == "status":
+            input(f"Player health: {player.health} - PRESS ENTER TO CONTINUE")
+            continue
+
         if action == "quit":
             print("Goodbye!")
             return 0
 
         if action == "inventory":
-            print(player.got_items())
+            input(player.got_items(), "- PRESS ENTER TO CONTINUE")
             continue
 
         if action == "look":
-            print(current_room.description)
+            input(current_room.description, "- PRESS ENTER TO CONTINUE")
             continue
 
         if action == "help":

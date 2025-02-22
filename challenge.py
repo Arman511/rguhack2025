@@ -52,7 +52,11 @@ def console_challenge():
 
         print(wrap_colour(ANSI_YELLOW, f"Solve: {question}"))
         start_time = time.time()
-        user_answer = input("Your answer: ").strip()
+        user_answer = input(
+            "Your answer(type exit to return to the corridor): "
+        ).strip()
+        if user_answer.lower() == "exit":
+            return "EXIT"
         end_time = time.time()
 
         if end_time - start_time > time_limit:
@@ -282,9 +286,10 @@ def riddle_challenge():
     print(
         wrap_colour(
             ANSI_BLUE,
-            "You enter the riddle room, there is machine displaying a riddle, with  a laser pointing at your head, you hear the door lock behind you",
+            "You enter the riddle room, there is machine displaying a riddle with a chest thats locked, with a laser pointing at your head",
         )
     )
+    print(wrap_colour(ANSI_GREEN, "TYPE EXIT TO BACK TO CORRIDOR"))
     print(riddle.riddle)
     print("Options")
     shuffled = riddle.options[:]
@@ -294,6 +299,8 @@ def riddle_challenge():
     ans = -1
     while ans < 0 or ans > len(shuffled) - 1:
         ans = input("Enter option: ").strip()
+        if ans.lower() == "exit":
+            return "EXIT"
         try:
             ans = int(ans)
         except Exception:
@@ -402,7 +409,11 @@ def hangman_challenge():
                 )
             )
             return True
-        guess = input(wrap_colour(ANSI_YELLOW, "Guess a letter: ")).upper()
+        guess = input(
+            wrap_colour(ANSI_YELLOW, "Guess a letter(Press exit to exit): ")
+        ).upper()
+        if guess.lower() == "exit":
+            return "EXIT"
         if guess in secret:
             guessed.add(guess)
         else:
@@ -433,7 +444,13 @@ def wordle_challenge():
 
     for attempt in range(6):
         print(f"Guesses remaining: {attempts_remaining}")
-        user_guess = input("Enter your guess: ").strip().lower()
+        user_guess = (
+            input("Enter your guess(type exit to return to the corridor): ")
+            .strip()
+            .lower()
+        )
+        if user_guess == "exit":
+            return "EXIT"
         if user_guess not in GUESS_SET:
             print(wrap_colour(ANSI_RED, "Invalid guess, try again"))
             continue
