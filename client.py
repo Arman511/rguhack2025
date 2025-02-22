@@ -1,4 +1,5 @@
 import random
+import challenge
 from colours import (
     wrap_colour,
     ANSI_RED,
@@ -6,7 +7,7 @@ from colours import (
     # ANSI_BLACK,
     # ANSI_GREEN,
     # ANSI_YELLOW,
-    # ANSI_BLUE,
+    ANSI_BLUE,
     # ANSI_PURPLE,
     # ANSI_CYAN,
     # ANSI_WHITE,
@@ -18,7 +19,9 @@ from room_manager import get_rooms
 player = None
 
 rooms = get_rooms()
-key_not_in_room = random.choice([3, 4, 5, 6])
+challenge_rooms = [3, 4, 5, 6]
+key_not_in_room = random.choice(challenge_rooms)
+keys = [f"Key {i}" for i in range(1, 4)]
 
 
 def main():
@@ -39,9 +42,15 @@ def main():
         print("Current room: ", wrap_colour(ANSI_RED, current_room.name))
         print(current_room.description)
 
-        if current_room.id == key_not_in_room:
-            print(wrap_colour(ANSI_RED, "You found a key!"))
-            player.add_item_to_inventory("Key 1")
+        if current_room.id in challenge_rooms:
+            passed = challenge(current_room)
+            if not passed:
+                print(wrap_colour(ANSI_RED, "You died"))
+                current_room = rooms[0]
+                continue
+
+            if current_room.id != key_not_in_room:
+                player.add_item(f"Key {current_room.id}")
 
         action = input("What would you like to do? ").strip().lower()
 
@@ -51,7 +60,7 @@ def main():
 
         if action == "quit":
             print("Goodbye!")
-            break
+            return 0
 
         if action == "inventory":
             print(player.got_items())
@@ -62,15 +71,26 @@ def main():
             continue
 
         if action == "go":
+            possible_rooms = {
+                room.room_id: f"{room.room_id} - {room.name}"
+                for room in rooms
+                if room.can_enter_room(player)
+            }
+            print(wrap_colour(ANSI_BLUE, "Possible rooms: "))
+            for room in possible_rooms.values():
+                print(room)
             direction = input("Which direction would you like to go? ").strip().lower()
-            next_room = current_room.go(direction)
-            if next_room:
-                if next_room.can_enter_room(player):
-                    player.change_room(next_room.id)
-                else:
-                    print("You cannot enter this room")
-            else:
+            if not direction:
                 print("Invalid direction")
+                continue
+            if not direction.isdigit():
+                print("Invalid direction")
+                continue
+            direction = int(direction)
+            if direction not in possible_rooms:
+                print("Invalid direction")
+                continue
+            player.change_room(direction)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,5 @@
 import requests
-from client import key_not_in_room
-from colours import wrap_colour, ANSI_BLUE
+from colours import ANSI_RED, wrap_colour, ANSI_BLUE
 
 
 def challenge(challenge_id):
@@ -32,3 +31,19 @@ def riddle_challenge():
             "You enter the riddle room, there is machine displaying a riddle, with  a laser pointing at your head, you hear the door lock behind you",
         )
     )
+    print(riddle)
+    user_answer = input("What is your answer? ").strip().lower()
+    if user_answer == answer:
+        print(wrap_colour(ANSI_BLUE, "The laser turns off and the door unlocks"))
+        return True
+    else:
+        print(wrap_colour(ANSI_RED, "The laser fires and you die"))
+        return False
+
+
+def hangman_challenge():
+    pass
+
+
+def quick_maths_challenge():
+    pass
