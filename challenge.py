@@ -1,6 +1,6 @@
 from colours import ANSI_RED, wrap_colour, ANSI_BLUE, ANSI_GREEN, ANSI_YELLOW, ANSI_PURPLE
 from utils.wordle import wordle_response
-
+from player import Player
 # import pandas as pd
 import random
 import time
@@ -11,6 +11,27 @@ with open("utils/data/all_answers.csv") as f:
 with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
 
+EVENT_CHANCES = {"type_fast":0.1, "cat":0.1, "dog":0.1}
+
+def random_event(player: Player):
+    print()
+    events = list(EVENT_CHANCES.keys())
+    events.append("nothing")
+    probabilities = list(EVENT_CHANCES.values())
+    probabilities.append(1-(sum(probabilities))) # nothing probability
+    # print(events, probabilities)
+    chosen_event = random.choices(events, probabilities)[0]
+
+    if chosen_event == "nothing":
+        return
+    elif chosen_event == "type_fast":
+        type_fast_event(player)
+    elif chosen_event == "cat":
+        cat_event(player)
+    elif chosen_event == "dog":
+        dog_event(player)
+    else:
+        print(wrap_colour(ANSI_RED, "Error: Unknown event."))
 
 def challenge(challenge_id):
     match challenge_id:
@@ -481,7 +502,7 @@ def wordle_challenge():
     )
     return False
 
-def type_fast_event():
+def type_fast_event(player: Player):
     actions = ["duck", "hide", "hit", "jump", "guard"]
     action_dialogues = {
         "duck": {
@@ -520,11 +541,9 @@ def type_fast_event():
 
     if end_time - start_time > time_limit:
         print(wrap_colour(ANSI_RED, "Too slow! You fail to react, and disaster strikes."))
-        return False
-
-    if user_action == chosen_action:
+        player.player_minus_health()
+    elif user_action == chosen_action:
         print(wrap_colour(ANSI_BLUE, action_dialogues[chosen_action]["success"]))
-        return True
     else:
         print(
             wrap_colour(
@@ -532,5 +551,54 @@ def type_fast_event():
                 action_dialogues[chosen_action]["failure"].format(action=user_action),
             )
         )
-        return False
+        player.player_minus_health()
+
+def cat_event(player: Player):
+    print(wrap_colour(
+        ANSI_BLUE,
+        "A small cat appears, meowing softly. Will you pet the cat?"
+    ))
+    choice = input("Pet the cat? (yes/no/exit): ").lower().strip()
+    if choice == "exit":
+        return "EXIT"
+    elif choice == "yes":
+        player.health += 1
+        print(
+            wrap_colour(
+                ANSI_GREEN,
+                "You pet the cat, it purrs contentedly, and you feel slightly healthier (+1 health)."
+            )
+        )
+    else:
+        print(wrap_colour(ANSI_RED, "The cat scampers away, leaving you as you were."))
+
+def dog_event(player: Player):
+    print(wrap_colour(
+        ANSI_BLUE,
+        "A large dog appears, growling softly. Will you pet the dog?"
+    ))
+    choice = input("Pet the dog? (yes/no/exit): ").lower().strip()
+    if choice == "exit":
+        return "EXIT"
+    elif choice == "yes":
+        if "meat" in [item.lower() for item in player.inventory]:
+            player.health += 2
+            print(
+                wrap_colour(
+                    ANSI_GREEN,
+                    "You offer the dog some meat, it wags its tail happily, and you feel much healthier (+2 health)."
+                )
+            )
+        else:
+            player.player_minus_health()
+            print(
+                wrap_colour(
+                    ANSI_RED,
+                    "The dog bites you as you have no meat to offer (-1 health)."
+                )
+            )
+    else:
+        print(wrap_colour(ANSI_RED, "The dog growls and leaves, leaving you as you were."))
+    return True
+
 

@@ -1,6 +1,6 @@
 import random
 from boss_battle import boss_room
-from challenge import challenge
+from challenge import challenge, random_event
 from colours import (
     wrap_colour,
     ANSI_RED,
@@ -46,10 +46,12 @@ def main():
         print(current_room.description)
 
         if current_room.id in challenge_rooms:
+            random_event(player)
             passed = challenge(current_room.id)
             if not passed:
                 player.player_minus_health()
-                
+                print(wrap_colour(ANSI_PURPLE, "In the last second you escape with your life and the room reset mysteriously",))
+                input(wrap_colour(ANSI_RED, "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE"))
                 continue
 
             elif passed == "EXIT":

@@ -50,6 +50,5 @@ class Player:
             input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
             os.system("cls" if os.name == "nt" else "clear")
             raise SystemExit
-        else:
-            print(wrap_colour(ANSI_PURPLE, "In the last second you escape with your life and the room reset mysteriously",))
-            input(wrap_colour(ANSI_RED, "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE"))
+
+
