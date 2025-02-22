@@ -39,10 +39,6 @@ def main():
     possible_actions = ["go", "look", "inventory", "quit", "status", "help"]
 
     while True:
-        if player.health <= 0:
-            player.player_die()
-            player = Player(username)
-            player.current_room = 0
         print("\n")
         current_room = rooms[player.get_current_room()]
         print("Current room:", wrap_colour(ANSI_RED, current_room.name))
@@ -52,7 +48,9 @@ def main():
             passed = challenge(current_room.id)
             if not passed:
                 if player.health <= 0:
-                    continue
+                    player.player_die()
+                    player = Player(username)
+                    player.current_room = 0
                 else:
                     print(
                         wrap_colour(
