@@ -51,7 +51,7 @@ OIL_RIG_WORDLE_ROOM = Room(
 OIL_RIG_ENGINE_ROOM = Room(
     "Oil Rig Engine Room",
     "You are in the oil rig engine room. It is dark and damp. You can hear the sound of water dripping.",
-    6,
+    7,
     previous_room=2,
 )
 

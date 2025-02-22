@@ -20,7 +20,7 @@ import os
 player = None
 
 rooms = get_rooms()
-challenge_rooms = [3, 4, 5]
+challenge_rooms = [3, 4, 5, 6]
 key_not_in_room = random.choice(challenge_rooms)
 keys = [f"Key {i}" for i in range(1, 4)]
 
