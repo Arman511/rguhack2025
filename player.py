@@ -10,7 +10,13 @@ class Player:
         self.karma = 0
         self.health = 3
         with open("items.txt", "r") as f:
-            self.inventory = {line.strip(): 0 for line in f}
+            self.inventory = {}
+            for line in f:
+                item = line.strip()
+                if item in self.inventory:
+                    self.inventory[item] +1
+                else:
+                    self.inventory[item] = 1
 
         self.current_room = 0
 
@@ -30,13 +36,21 @@ class Player:
         self.karma -= karma
 
     def add_item_to_inventory(self, item):
-        self.inventory[item] = 1
+        if item in self.inventory:
+            self.inventory[item] += 1
+        else:
+            self.inventory[item] = 1
 
     def remove_item_from_inventory(self, item):
-        del self.inventory[item]
+        if item in self.inventory:
+            self.inventory[item] -= 1
+            if self.inventory[item] == 0:
+                self.inventory.pop(item, None)
+        else:
+            print("Error: Item not in inventory")
 
     def got_items(self):
-        return [item for item in self.inventory if self.inventory[item] == 1]
+        return [item for item in self.inventory if self.inventory[item] >= 1]
 
     def get_current_room(self):
         return self.current_room

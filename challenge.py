@@ -19,6 +19,19 @@ with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
 
 EVENT_CHANCES = {"type_fast":0.1, "cat":0.1, "dog":0.1}
+ITEM_DROP = {"meat":0.1, "lasagna":0.05}
+def item_draw(player: Player):
+    print()
+    items = list(ITEM_DROP.keys())
+    probabilities = list(ITEM_DROP.values())
+    probabilities.append(1 - sum(probabilities))  # probability for no item
+    items.append(None)  # no item
+
+    chosen_item = random.choices(items, probabilities)[0]
+
+    if chosen_item:
+        player.add_item_to_inventory(chosen_item)
+        print(wrap_colour(ANSI_GREEN, f"You found a {chosen_item}! It has been added to your inventory."))
 
 def random_event(player: Player):
     print()
@@ -589,6 +602,7 @@ def dog_event(player: Player):
         return "EXIT"
     elif choice == "yes":
         if "meat" in [item.lower() for item in player.inventory]:
+            player.remove_item_from_inventory("meat")
             player.health += 2
             print(
                 wrap_colour(

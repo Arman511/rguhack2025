@@ -1,6 +1,6 @@
 import random
 from boss_battle import boss_room
-from challenge import challenge, random_event
+from challenge import challenge, random_event, item_draw
 from colours import (
     wrap_colour,
     ANSI_RED,
@@ -51,6 +51,7 @@ def main():
         print(current_room.description)
 
         if current_room.id in challenge_rooms:
+            item_draw(player)
             random_event(player)
             passed = challenge(current_room.id)
             if not passed:
