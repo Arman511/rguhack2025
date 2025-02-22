@@ -52,9 +52,7 @@ def main():
             passed = challenge(current_room.id)
             if not passed:
                 if player.health <= 0:
-                    player.player_die()
-                    player = Player(username)
-                    player.current_room = 0
+                    continue
                 else:
                     print(
                         wrap_colour(
