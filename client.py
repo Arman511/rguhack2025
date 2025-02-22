@@ -35,7 +35,7 @@ def main():
         username = username.strip()
 
     player = Player(username)
-    possible_actions = ["go", "look", "inventory", "quit", "help"]
+    possible_actions = ["go", "look", "inventory", "quit", "status", "help"]
 
     while True:
         print("\n")
@@ -85,16 +85,20 @@ def main():
             print("Invalid action")
             continue
 
+        if action == "status":
+            input(f"Player health: {player.health} - PRESS ENTER TO CONTINUE")
+            continue
+
         if action == "quit":
             print("Goodbye!")
             return 0
 
         if action == "inventory":
-            print(player.got_items())
+            input(player.got_items(), "- PRESS ENTER TO CONTINUE")
             continue
 
         if action == "look":
-            print(current_room.description)
+            input(current_room.description, "- PRESS ENTER TO CONTINUE")
             continue
 
         if action == "help":
