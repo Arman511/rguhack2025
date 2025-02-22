@@ -1,11 +1,12 @@
 import random
+from boss_battle import boss_room
 from challenge import challenge
 from colours import (
     wrap_colour,
     ANSI_RED,
     # ANSI_RESET,
     # ANSI_BLACK,
-    # ANSI_GREEN,
+    ANSI_GREEN,
     # ANSI_YELLOW,
     ANSI_BLUE,
     ANSI_PURPLE,
@@ -74,33 +75,61 @@ def main():
             print(wrap_colour(ANSI_PURPLE, "You SURVIVED"))
             player.current_room = 2
 
+        elif current_room.id == rooms[-1].id:
+            result = boss_room(player)
+
+            if not result:
+                input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
+                os.system("cls" if os.name == "nt" else "clear")
+                player = Player(username)
+                player.current_room = 0
+                continue
+            input(wrap_colour(ANSI_GREEN, "\n\nYOU WIN - PRESS ENTER TO CONTINUE"))
+            ans = ""
+            while True:
+                ans = input("Do you wanna play again (Y/n)").strip().lower()
+                os.system("cls" if os.name == "nt" else "clear")
+                player = Player(username)
+                player.current_room = 0
+                if ans == "n":
+                    break
+                if not ans or ans == "Y":
+                    ans = "Y"
+                    break
+                input(wrap_colour(ANSI_RED, "Invalid action - ENTER TO CONTINUE"))
+
+            if ans == "Y":
+                continue
+            else:
+                return
+
         action = input("What would you like to do? ").strip().lower()
 
         if action not in possible_actions:
-            print("Invalid action")
+            input(wrap_colour(ANSI_RED, "Invalid action - ENTER TO CONTINUE"))
             continue
 
-        if action == "status":
+        elif action == "status":
             input(f"Player health: {player.health} - PRESS ENTER TO CONTINUE")
             continue
 
-        if action == "quit":
+        elif action == "quit":
             print("Goodbye!")
             return 0
 
-        if action == "inventory":
+        elif action == "inventory":
             input(player.got_items(), "- PRESS ENTER TO CONTINUE")
             continue
 
-        if action == "look":
+        elif action == "look":
             input(current_room.description, "- PRESS ENTER TO CONTINUE")
             continue
 
-        if action == "help":
+        elif action == "help":
             print("You can do the following actions: go, look, inventory, quit, help")
             continue
 
-        if action == "go":
+        elif action == "go":
             possible_rooms = {
                 room.id: f"{room.id} - {room.name}"
                 for room in rooms
