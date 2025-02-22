@@ -1,14 +1,8 @@
-<<<<<<< HEAD
-import requests
+
 from colours import ANSI_RED, wrap_colour, ANSI_BLUE, ANSI_GREEN, ANSI_YELLOW
 from utils.wordle import wordle_response
 # import pandas as pd
 import random
-=======
-import random
-from colours import ANSI_RED, wrap_colour, ANSI_BLUE
-
->>>>>>> 39683feb01db875b2abb0ef38d30a00351d05ab9
 
 def challenge(challenge_id):
     match challenge_id:
