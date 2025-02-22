@@ -47,8 +47,8 @@ def main():
         if current_room.id in challenge_rooms:
             passed = challenge(current_room.id)
             if not passed:
+                player.player_minus_health()
                 if player.health <= 0:
-                    player.player_die()
                     player = Player(username)
                     player.current_room = 0
                 else:
