@@ -1,8 +1,10 @@
+import os
 class Player:
     def __init__(self, name):
         self.name = name
         self.score = 0
         self.karma = 0
+        self.health = 3
         with open("items.txt", "r") as f:
             self.inventory = {line.strip(): 0 for line in f}
 
@@ -37,3 +39,11 @@ class Player:
 
     def change_room(self, room):
         self.current_room = room
+
+    def player_die(self):
+        input(
+            wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE")
+        )
+        os.system("cls" if os.name == "nt" else "clear")
+        player = Player(username)
+        player.current_room = 0

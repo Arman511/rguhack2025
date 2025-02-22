@@ -35,7 +35,7 @@ def main():
         username = username.strip()
 
     player = Player(username)
-    possible_actions = ["go", "look", "inventory", "quit"]
+    possible_actions = ["go", "look", "inventory", "quit", "status", "help"]
 
     while True:
         print("\n")
@@ -46,10 +46,25 @@ def main():
         if current_room.id in challenge_rooms:
             passed = challenge(current_room.id)
             if not passed:
-                input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
-                os.system("cls" if os.name == "nt" else "clear")
-                player = Player(username)
-                player.current_room = 0
+                if player.health == 0:
+                    player.player_die()
+                else:
+                    print(
+                        wrap_colour(
+                            ANSI_PURPLE,
+                            "In the last second you escape with your life and the room reset mysteriously",
+                        )
+                    )
+                    input(
+                        wrap_colour(
+                            ANSI_RED,
+                            "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE",
+                        )
+                    )
+                continue
+
+            if passed == "EXIT":
+                player.current_room = 2
                 continue
 
             if current_room.id != key_not_in_room:
@@ -65,16 +80,24 @@ def main():
             print("Invalid action")
             continue
 
+        if action == "status":
+            input(f"Player health: {player.health} - PRESS ENTER TO CONTINUE")
+            continue
+
         if action == "quit":
             print("Goodbye!")
             return 0
 
         if action == "inventory":
-            print(player.got_items())
+            input(player.got_items(), "- PRESS ENTER TO CONTINUE")
             continue
 
         if action == "look":
-            print(current_room.description)
+            input(current_room.description, "- PRESS ENTER TO CONTINUE")
+            continue
+
+        if action == "help":
+            print("You can do the following actions: go, look, inventory, quit, help")
             continue
 
         if action == "go":
