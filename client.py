@@ -47,21 +47,11 @@ def main():
         if current_room.id in challenge_rooms:
             passed = challenge(current_room.id)
             if not passed:
-                print(
-                    wrap_colour(
-                        ANSI_PURPLE,
-                        "In the last second you escape with your life and the room reset mysteriously",
-                    )
-                )
-                input(
-                    wrap_colour(
-                        ANSI_RED,
-                        "\n\nYOU LOST A LIFE POINT - PRESS ENTER TO CONTINUE",
-                    )
-                )
+                player.player_minus_health()
+                print(wrap_colour(ANSI_PURPLE, "In the last second you escape with your life and the room reset mysteriously",))
                 continue
 
-            if passed == "EXIT":
+            elif passed == "EXIT":
                 player.current_room = 2
                 continue
 
@@ -133,4 +123,12 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        try:
+            main()
+        except SystemExit:
+            ans = input("Enter Y to play again")
+            if ans.lower() != "y":
+                break
+
+    print("Goodbye!")
