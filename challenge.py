@@ -21,13 +21,71 @@ def challenge(challenge_id):
         case 5:
             hangman_challenge()
         case 6:
-            quick_maths_challenge()
+            wordle_challenge()
         case _:
             raise ValueError("Invalid challenge ID")
 
 
 def console_challenge():
-    pass
+    operations = ["+", "-", "*"]
+    num_questions = 3
+    time_limit = 5  # seconds
+
+    print(
+        wrap_colour(
+            ANSI_BLUE,
+            "You step into the chamber of quick maths. A booming voice declares: 'Solve these problems swiftly, or face the wrath of the ancient guardians!'",
+        )
+    )
+
+    for _ in range(num_questions):
+        num1 = random.randint(10, 99)
+        num2 = random.randint(10, 99)
+        operation = random.choice(operations)
+
+        if operation == "*":
+            num1 = random.randint(1, 12)
+            num2 = random.randint(1, 12)
+
+        question = f"{num1} {operation} {num2}"
+        answer = eval(question)
+
+        print(wrap_colour(ANSI_YELLOW, f"Solve: {question}"))
+        start_time = time.time()
+        user_answer = input("Your answer: ").strip()
+        end_time = time.time()
+
+        if end_time - start_time > time_limit:
+            print(
+                wrap_colour(
+                    ANSI_RED,
+                    "Time's up! The guardians awaken and you are engulfed in darkness.",
+                )
+            )
+            return False
+
+        try:
+            user_answer = int(user_answer)
+        except ValueError:
+            print(wrap_colour(ANSI_RED, "Invalid input! The guardians are displeased."))
+            return False
+
+        if user_answer != answer:
+            print(
+                wrap_colour(
+                    ANSI_RED, "Wrong answer! The ground trembles as the guardians stir."
+                )
+            )
+            return False
+
+    print(
+        wrap_colour(
+            ANSI_BLUE,
+            "Congratulations! You have appeased the guardians with your swift and accurate calculations. The path ahead is clear.",
+        )
+    )
+    return True
+
 
 
 class Riddle:
@@ -408,63 +466,3 @@ def wordle_challenge():
     )
     return False
 
-
-def quick_maths_challenge():
-    operations = ["+", "-", "*"]
-    num_questions = 5
-    time_limit = 5  # seconds
-
-    print(
-        wrap_colour(
-            ANSI_BLUE,
-            "You step into the chamber of quick maths. A booming voice declares: 'Solve these problems swiftly, or face the wrath of the ancient guardians!'",
-        )
-    )
-
-    for _ in range(num_questions):
-        num1 = random.randint(10, 99)
-        num2 = random.randint(10, 99)
-        operation = random.choice(operations)
-
-        if operation == "*":
-            num1 = random.randint(1, 12)
-            num2 = random.randint(1, 12)
-
-        question = f"{num1} {operation} {num2}"
-        answer = eval(question)
-
-        print(wrap_colour(ANSI_YELLOW, f"Solve: {question}"))
-        start_time = time.time()
-        user_answer = input("Your answer: ").strip()
-        end_time = time.time()
-
-        if end_time - start_time > time_limit:
-            print(
-                wrap_colour(
-                    ANSI_RED,
-                    "Time's up! The guardians awaken and you are engulfed in darkness.",
-                )
-            )
-            return False
-
-        try:
-            user_answer = int(user_answer)
-        except ValueError:
-            print(wrap_colour(ANSI_RED, "Invalid input! The guardians are displeased."))
-            return False
-
-        if user_answer != answer:
-            print(
-                wrap_colour(
-                    ANSI_RED, "Wrong answer! The ground trembles as the guardians stir."
-                )
-            )
-            return False
-
-    print(
-        wrap_colour(
-            ANSI_BLUE,
-            "Congratulations! You have appeased the guardians with your swift and accurate calculations. The path ahead is clear.",
-        )
-    )
-    return True
