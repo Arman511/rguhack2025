@@ -1,4 +1,4 @@
-from colours import ANSI_RED, wrap_colour, ANSI_BLUE, ANSI_GREEN, ANSI_YELLOW
+from colours import ANSI_RED, wrap_colour, ANSI_BLUE, ANSI_GREEN, ANSI_YELLOW, ANSI_PURPLE
 from utils.wordle import wordle_response
 
 # import pandas as pd
@@ -430,7 +430,6 @@ def hangman_challenge():
 
 
 def wordle_challenge():
-
     # pick a random wordle answer
     answer = random.choice(ANSWER_LIST)
     attempts_remaining = 6
@@ -481,3 +480,56 @@ def wordle_challenge():
         wrap_colour(ANSI_GREEN, answer.upper()),
     )
     return False
+
+def quick_time_event():
+    actions = ["duck", "hide", "hit", "jump", "guard"]
+    action_dialogues = {
+        "duck": {
+            "problem": f"{wrap_colour(ANSI_BLUE, 'Arrows whiz overhead! Type')} '{wrap_colour(ANSI_PURPLE, 'duck')}' {wrap_colour(ANSI_BLUE, 'to avoid them!')}",
+            "success": "You duck just in time, and the arrows harmlessly pass above you!",
+            "failure": "You tried to {action}, but an arrow pierces you because you needed to duck!"
+        },
+        "hide": {
+            "problem": f"{wrap_colour(ANSI_BLUE, 'A patrol is closing in! Type')} '{wrap_colour(ANSI_PURPLE, 'hide')}' {wrap_colour(ANSI_BLUE, 'to stay unseen!')}",
+            "success": "You melt into the shadows, escaping their notice!",
+            "failure": "You tried to {action}, but you're spotted because you needed to hide!"
+        },
+        "hit": {
+            "problem": f"{wrap_colour(ANSI_BLUE, 'A goblin rushes at you! Type')} '{wrap_colour(ANSI_PURPLE, 'hit')}' {wrap_colour(ANSI_BLUE, 'to strike first!')}",
+            "success": "You land a swift blow and the goblin collapses!",
+            "failure": "You tried to {action}, but the goblin lands a hit on you first!"
+        },
+        "jump": {
+            "problem": f"{wrap_colour(ANSI_BLUE, 'The ground crumbles beneath you! Type')} '{wrap_colour(ANSI_PURPLE, 'jump')}' {wrap_colour(ANSI_BLUE, 'to leap to safety!')}",
+            "success": "You jump just in time and avoid the collapsing floor!",
+            "failure": "You tried to {action}, but you plunge down because you needed to jump!"
+        },
+        "guard": {
+            "problem": f"{wrap_colour(ANSI_BLUE, 'An arrow speeds your way! Type')} '{wrap_colour(ANSI_PURPLE, 'guard')}' {wrap_colour(ANSI_BLUE, 'to defend!')}",
+            "success": "You raise your shield in the nick of time, deflecting the arrow!",
+            "failure": "You tried to {action}, leaving you wide open! The arrow strikes you down!"
+        },
+    }
+    time_limit = 10
+    chosen_action = random.choice(actions)
+    print(wrap_colour(ANSI_BLUE, action_dialogues[chosen_action]["problem"]))
+
+    start_time = time.time()
+    user_action = input("Your action: ").strip().lower()
+    end_time = time.time()
+
+    if end_time - start_time > time_limit:
+        print(wrap_colour(ANSI_RED, "Too slow! You fail to react, and disaster strikes."))
+        return False
+
+    if user_action == chosen_action:
+        print(wrap_colour(ANSI_BLUE, action_dialogues[chosen_action]["success"]))
+        return True
+    else:
+        print(
+            wrap_colour(
+                ANSI_RED,
+                action_dialogues[chosen_action]["failure"].format(action=user_action),
+            )
+        )
+        return False
