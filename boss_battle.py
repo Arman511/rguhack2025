@@ -1,7 +1,7 @@
 import time
 import random
 from typing import Callable
-from colours import wr, wrap_colour
+from colours import wr
 from inspect import signature
 
 
@@ -31,7 +31,6 @@ def call_challenge(challenge_func):
 
 def clear():
     import os
-
     os.system("cls" if os.name == "nt" else "clear")
 
 
@@ -59,5 +58,5 @@ def boss_room():
 
     return True
 
-#TEST CODE
-#boss_room()
+# TEST CODE
+# boss_room()
