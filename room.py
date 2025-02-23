@@ -6,7 +6,7 @@ class Room:
         self.id = id
         self.previous_room = previous_room
         self.requirements = []
-
+        self.items ={}
     def add_paths(self, paths):
         self.paths.update(paths)
 

@@ -4,6 +4,8 @@ SUMBARINE_MAIN_ROOM = Room(
     "Submarine",
     "You are in a submarine. It is dark and damp. You can hear the sound of water dripping.",
     0,
+     #{"apple": ("you pick up the apple", "pickup"), "banana": ("you pick up the banana", "pickup"), "rat": ("loose apple")},
+
 )
 
 SUMBARINE_TOILET = Room(

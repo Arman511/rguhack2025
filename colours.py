@@ -20,12 +20,13 @@ colors = [ANSI_RED, ANSI_GREEN, ANSI_YELLOW, ANSI_BLUE, ANSI_PURPLE, ANSI_CYAN]
 
 def wrap_random_colour_per_character(text):
     result = ""
-    random_number = random.randint(1, 2)
-    for i in range(0, len(text), random_number):
-        random_number = random.randint(1, 2)
-        random_colour = random.choice(colors)
-        result += random_colour + text[i:i+random_number] + ANSI_RESET
-        i += random_number + 1
+    random_number = random.randint(1, 5)
+    i = 0
+    while i < len(text):
+        random_number = random.randint(1, 5)  # Choose random length for each slice (1 or 2 or 3)
+        random_colour = random.choice(colors)  # Select a random color
+        result += random_colour + text[i:i + random_number] + ANSI_RESET
+        i += random_number
     # for char in text:
     #     random_colour = random.choice(colors)  # Select a random color for each character
     #     result += random_colour + char + ANSI_RESET
