@@ -30,21 +30,21 @@ OIL_RIG_CONSOLE_ROOM = Room(
 )
 
 OIL_RIG_RIDDLE_ROOM = Room(
-    "Oil Rig Riddle Room",
-    "You are in the oil rig riddle room. The room is crowded by colourful boxes and decorations, filled with awe by the beauty of the room you became distracted by the train of words appearing one by one before your eyes which eventually leading to a question and it’s four choices placed underneath, one of them being the answer to the question.",
+    "Oil Rig Cellar Room",
+    "You are in the oil rig cellar room. The room is crowded by colourful boxes and decorations, filled with awe by the beauty of the room you became distracted by the train of words appearing one by one before your eyes which eventually leading to a question and it’s four choices placed underneath, one of them being the answer to the question.",
     4,
     previous_room=2,
 )
 
 OIL_RIG_HANGMAN_ROOM = Room(
-    "Oil Rig Hangman Room",
-    "You are in the oil rig hangman room. You are faced with a dark room. The only light comes from a single bulb hanging from the ceiling. In the middle of the room, there is a table with a glowing letter engraved in it. There is a drawing of a stick figure hanging from a gallows. Underneath the drawing, there are a series of blank spaces. You realize that you are in a game of hangman. You must guess the word that is hidden in the blank spaces. If you guess the wrong letter, a part of the stick figure will be drawn. If you guess the wrong letter too many times, the stick figure will be complete, and you will lose the game.",
+    "Oil Rig Gallows Room",
+    "You are in the oil rig gallows room. You are faced with a dark room. The only light comes from a single bulb hanging from the ceiling. In the middle of the room, there is a table with a glowing letter engraved in it. There is a drawing of a stick figure hanging from a gallows. Underneath the drawing, there are a series of blank spaces. You realize that you are in a game of hangman. You must guess the word that is hidden in the blank spaces. If you guess the wrong letter, a part of the stick figure will be drawn. If you guess the wrong letter too many times, the stick figure will be complete, and you will lose the game.",
     5,
     previous_room=2,
 )
 OIL_RIG_WORDLE_ROOM = Room(
-    "Oil Rig Wordle Room",
-    "You are in the oil rig engine room. You enter a blank room, all white, expressionless leaving you thoughtless and confused. Completely silent all you can hear is your own breathing. The room starts to glow as if you it sensed your presence, 5 boxes suddenly appear in front of you, you are then faced with the challenge to guess the random 5-letter word while gaining hints from your wrong answers.",
+    "Oil Rig Library Room",
+    "You are in the oil rig wordle room. You enter a blank room, all white, expressionless leaving you thoughtless and confused. Completely silent all you can hear is your own breathing. The room starts to glow as if you it sensed your presence, 5 boxes suddenly appear in front of you, you are then faced with the challenge to guess the random 5-letter word while gaining hints from your wrong answers.",
     6,
     previous_room=2,
 )
