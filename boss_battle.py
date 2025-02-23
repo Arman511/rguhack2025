@@ -69,7 +69,7 @@ def boss_dialogue():
     clear()
     print(wr("What is your name? :("))
     # typewriter(wrap_colour(ANSI_RED, "BLOOD"), 0.08)
-    time.sleep(0.05)
+    time.sleep(0.5)
     clear()
     print(wr("What is your name? :D"))
     input()
