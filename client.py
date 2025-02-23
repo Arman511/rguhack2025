@@ -2,6 +2,7 @@ import random
 import sys
 from boss_battle import boss_room
 from challenge import challenge, random_event, item_draw
+from shared import clear, typewriter
 from colours import (
     wrap_colour,
     ANSI_RED,
@@ -30,6 +31,7 @@ rooms = get_rooms()
 challenge_rooms = [3, 4, 5, 6]
 key_not_in_room = random.choice(challenge_rooms)
 keys = [f"Key {i}" for i in range(1, 4)]
+pygame.mixer.init()
 
 
 def clear():
@@ -37,35 +39,43 @@ def clear():
 
 
 def main():
-    clear()
-    print(wrap_colour(ANSI_RED, "MISSION: FIX THE OIL RIG"))
-    print("The subarmarine is decending to the ocean floor and you are about to enter the oil rig.")
-    print("While you try to remember how to do your job you hear a tapping on the window!")
-    print(wrap_colour(ANSI_YELLOW, "Hello there traveler, are you here to fix the ghost rig!"), " the angular fish blubs")
-    time.sleep(1)
-    agree = input("Are you here to fix the haunted oil rig? (Y/N): ")
-    if agree == "Y" or agree == "y":
-        print(wrap_colour(ANSI_YELLOW, "Thank you so much!, ALL of my friends have been"), wrap_colour(ANSI_RED, "eaten"), wrap_colour(ANSI_YELLOW, "by the ghosts so it's great to hear someone is coming to sort it!"))
-    else:
-        print("Then buzz off!")
-        print("You turn the submarine around")
-    print(wrap_colour(ANSI_YELLOW, "I am the ghost of the rig and I will guide you through the rooms"))
 
-    username = ""
     global player
     done_rooms = set()
+    username = ""
     while not username:
         username = input("Enter your username: ")
         username = username.strip()
-
     player = Player(username)
+    clear()
+
+    typewriter(wrap_colour(ANSI_RED, "MISSION: FIX THE OIL RIG"))
+    typewriter("The subarmarine is decending to the ocean floor and you are about to enter the oil rig.")
+    typewriter("While you try to remember how to do your job you hear a tapping on the submarine window!")
+    typewriter(wrap_colour(ANSI_YELLOW, "Hello there traveler, are you here to fix the ghost rig!") + " the angular fish blubs")
+    time.sleep(1)
+    agree = input("Are you here to fix the haunted oil rig? (Y/N): ")
+    if agree == "Y" or agree == "y":
+        typewriter(wrap_colour(ANSI_YELLOW, "Thank you so much!, ALL of my friends have been"), wrap_colour(ANSI_RED, "eaten"), wrap_colour(ANSI_YELLOW, "by the ghosts so it's great to hear someone is coming to sort it!"))
+    else:
+        typewriter("Then buzz off!")
+        typewriter("You turn the submarine around and hit the gas")
+        time.sleep(3)
+        pygame.mixer.Sound("music/bang.mp3").play()
+        typewriter("The submarine implodes without you ever knowing it or why")
+        player.player_minus_health(9999)
+    typewriter(wrap_colour(ANSI_YELLOW, "I am the ghost of the rig and I will guide you through the rooms"))
+
+    
+
+    
     possible_actions = ["go", "inventory", "quit", "status", "help", "?"]
 
     while True:
         clear()
         current_room = rooms[player.get_current_room()]
-        print("Current room:", wrap_colour(ANSI_RED, current_room.name))
-        print(current_room.description)
+        typewriter("Current room:", wrap_colour(ANSI_RED, current_room.name))
+        typewriter(current_room.description)
 
         if current_room.id in challenge_rooms:
             done_rooms.add(0)
@@ -74,7 +84,7 @@ def main():
             passed = challenge(current_room.id)
             if not passed:
                 player.player_minus_health()
-                print(
+                typewriter(
                     wrap_colour(
                         ANSI_PURPLE,
                         "In the last second you escape with your life and the room reset mysteriously",
@@ -93,7 +103,7 @@ def main():
 
             if current_room.id != key_not_in_room:
                 player.add_item(keys.pop())
-                print(wrap_colour(ANSI_BLUE, "You got a key!"))
+                typewriter(wrap_colour(ANSI_BLUE, "You got a key!"))
 
             done_rooms.add(current_room.id)
             input(
@@ -130,19 +140,19 @@ def main():
                 and player.current_room != room.id
                 and room.id not in done_rooms
             }
-            print(wrap_colour(ANSI_BLUE, "Possible rooms: "))
+            typewriter(wrap_colour(ANSI_BLUE, "Possible rooms: "))
             for room in possible_rooms.values():
-                print(room)
+                typewriter(room)
             direction = input("Which direction would you like to go? ").strip().lower()
             if not direction:
-                print("Invalid direction")
+                typewriter("Invalid direction")
                 continue
             if not direction.isdigit():
-                print("Invalid direction")
+                typewriter("Invalid direction")
                 continue
             direction = int(direction)
             if direction not in possible_rooms:
-                print("Invalid direction")
+                typewriter("Invalid direction")
                 continue
             player.change_room(direction)
 
@@ -156,17 +166,15 @@ if __name__ == "__main__":
 
     def play_music():
         try:
-            pygame.mixer.init()
             while not stop_event.is_set():
                 track = random.choice(musics)
                 pygame.mixer.music.load(track)
                 pygame.mixer.music.play()
                 while pygame.mixer.music.get_busy() and not stop_event.is_set():
                     pygame.time.Clock().tick(10)
-            pygame.mixer.music.stop()
         except Exception as e:
             pygame.mixer.music.stop()
-            print(e)
+            typewriter(e)
 
     music_thread = threading.Thread(target=play_music, daemon=True)
     music_thread.start()
@@ -182,7 +190,8 @@ if __name__ == "__main__":
             stop_event.set()
             break
 
+    pygame.mixer.music.stop()
     stop_event.set()
     music_thread.join()
-    print("Goodbye!")
+    typewriter("Goodbye!")
     sys.exit(0)
