@@ -346,7 +346,7 @@ riddles = [
 ]
 
 
-def riddle_challenge(can_exit=True):
+def riddle_challenge(player:Player, can_exit=True):
     riddle = random.choice(riddles)
     print(
         wrap_colour(
@@ -385,9 +385,17 @@ def riddle_challenge(can_exit=True):
     return False
 
 
-def hangman_challenge(can_exit=True):
+def hangman_challenge(player:Player, can_exit=True, is_boss_event=False):
     from room_manager import OIL_RIG_HANGMAN_ROOM
-
+    if not is_boss_event:
+        # you find a dead body on the gallows add meat to inventory
+        player.add_item_to_inventory("meat")
+        print(
+            wrap_colour(
+            ANSI_GREEN,
+            "You find a dead body hanging from the gallows. 'Free meat' you think to yourself."),
+            wrap_colour(
+            ANSI_BLUE, "(Meat has been added to your inventory)"),)
     room = OIL_RIG_HANGMAN_ROOM
     stages = [
         """
@@ -529,7 +537,7 @@ def hangman_challenge(can_exit=True):
             "You find yourself in a dark room with a noose hanging from the ceiling. A voice echoes: 'Guess the word or face the gallows!'",
         )
     )
-
+    input()
     while mistakes < len(stages) - 1:
         clear()
         print("Current room:", wrap_colour(ANSI_RED, room.name))

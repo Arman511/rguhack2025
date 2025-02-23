@@ -105,7 +105,7 @@ def main():
 
         elif current_room.id == rooms[-1].id:
             boss_event.set()
-            result = boss_room()
+            result = boss_room(player)
             if not result:
                 input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
             else:
