@@ -12,7 +12,5 @@ try {
     exit 1
 }
 
-python3 client.py
+python client.py
 
-# Assuming you have a Makefile with a 'ps1' target
-Invoke-Expression "make ps1"
