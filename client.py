@@ -135,7 +135,8 @@ def main():
             player.change_room(direction)
 
 
-musics = ["music/track1.mp3", "music/track2.mp3"]
+musics = ["music/track1.mp3", "music/track2.mp3",
+          "music/track3.mp3", "music/track4.mp3", "music/track5.mp3"]
 stop_event = threading.Event()
 
 

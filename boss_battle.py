@@ -95,14 +95,20 @@ def boss_room():
     for _ in range(100):
         print(wr("THE WALLS HAVE EYES THAT WATCH YOUR EVERY MOVE THE FLOOR IS ALIVE WITH WRITHING TENTACLES THE CEILING DRIPS WITH A THICK, BLACK ICHOR"))
         time.sleep(0.02)
-
+    clear()
+    typewriter(wr("You have 2 minutes..."))
+    now_time = time.time()
     for _ in range(3):  # Pick three challenges
         clear()
         challenge = CHALLENGES.pop()
         if not call_challenge(challenge):
             lose()
             return False
+    fin_time = time.time()
 
+    if fin_time - now_time > 120:
+        lose()
+        return False
     win()
     return True
 
