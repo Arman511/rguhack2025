@@ -15,10 +15,12 @@ ANSI_WHITE = "\u001b[37m"
 def wrap_colour(colour, text):
     return colour + text + ANSI_RESET
 
+
 # List of all colors
 colors = [ANSI_RED, ANSI_GREEN, ANSI_YELLOW, ANSI_BLUE, ANSI_PURPLE, ANSI_CYAN]
 
-def wrap_random_colour_per_character(text):
+
+def wr(text):
     result = ""
     random_number = random.randint(1, 5)
     i = 0
