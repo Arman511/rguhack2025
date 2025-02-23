@@ -1,6 +1,11 @@
 import random
 from typing import Callable
-from colours import wrap_colour, ANSI_PURPLE, ANSI_BLUE, wrap_random_colour_per_character
+from colours import (
+    wrap_colour,
+    ANSI_PURPLE,
+    ANSI_BLUE,
+    wrap_random_colour_per_character,
+)
 from inspect import signature
 
 
@@ -29,7 +34,7 @@ def call_challenge(challenge_func):
 
 
 def boss_room():
-    print(wrap_random_colour_per_character(ANSI_PURPLE, "As you enter the room you notice"), end=" ")
+    print(wrap_random_colour_per_character("As you enter the room you notice"), end=" ")
     input("Press enter to continue...")
     random.shuffle(challenges)
 
