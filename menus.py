@@ -18,9 +18,11 @@ class menus:
                 print("Your inventory is empty.")
             input("PRESS ENTER TO CONTINUE")
         elif action == "look":
-            input(current_room.description, "- PRESS ENTER TO CONTINUE")
+            input(f"{current_room.description} - PRESS ENTER TO CONTINUE")
         elif action == "help":
-            print("You can do the following actions: go, look, inventory, quit, help")
+            input(
+                "You can do the following actions: go, look, inventory, quit, help -- PRESS ENTER TO CONTINUE"
+            )
         elif action == "suicide":
             print(
                 "you punch through the wall and the pressure of the water blasts you and your crew. sadge"
