@@ -8,7 +8,7 @@ from colours import (
     # ANSI_RESET,
     # ANSI_BLACK,
     ANSI_GREEN,
-    # ANSI_YELLOW,
+    ANSI_YELLOW,
     ANSI_BLUE,
     ANSI_PURPLE,
     # ANSI_CYAN,
@@ -22,6 +22,7 @@ from player import Player
 from room_manager import get_rooms
 import os
 import threading
+import time
 
 player = None
 
@@ -37,7 +38,18 @@ def clear():
 
 def main():
     clear()
-    print(wrap_colour(ANSI_RED, "MISSION: FIX OIL RIG"))
+    print(wrap_colour(ANSI_RED, "MISSION: FIX THE OIL RIG"))
+    print("The subarmarine is decending to the ocean floor and you are about to enter the oil rig.")
+    print("While you try to remember how to do your job you hear a tapping on the window!")
+    print(wrap_colour(ANSI_YELLOW, "Hello there traveler, are you here to fix the ghost rig!"), " the angular fish blubs")
+    time.sleep(1)
+    agree = input("Are you here to fix the haunted oil rig? (Y/N): ")
+    if agree == "Y" or agree == "y":
+        print(wrap_colour(ANSI_YELLOW, "Thank you so much!, ALL of my friends have been"), wrap_colour(ANSI_RED, "eaten"), wrap_colour(ANSI_YELLOW, "by the ghosts so it's great to hear someone is coming to sort it!"))
+    else:
+        print("Then buzz off!")
+        print("You turn the submarine around")
+    print(wrap_colour(ANSI_YELLOW, "I am the ghost of the rig and I will guide you through the rooms"))
 
     username = ""
     global player
