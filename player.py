@@ -10,6 +10,7 @@ class Player:
         self.karma = 0
         self.health = 5
         self.inventory = {}
+        self.bonus_time = 0
 
         self.current_room = 0
 

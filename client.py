@@ -81,7 +81,7 @@ def main():
             done_rooms.add(0)
             item_draw(player)
             random_event(player)
-            passed = challenge(current_room.id)
+            passed = challenge(current_room.id, player)
             if not passed:
                 player.player_minus_health()
                 typewriter(

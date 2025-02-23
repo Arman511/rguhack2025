@@ -22,7 +22,7 @@ with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
 
 EVENT_CHANCES = {"type_fast": 0.1, "cat": 0.1, "dog": 0.1, "eldritch": 0.1}
-ITEM_DROP = {"meat": 0.1, "lasagna": 0.05}
+ITEM_DROP = {"meat": 0.1, "Einstein's Dream": 0.05}
 
 
 def item_draw(player: Player):
@@ -42,6 +42,14 @@ def item_draw(player: Player):
                 f"You found a {chosen_item}! It has been added to your inventory.",
             )
         )
+        if chosen_item == "Einstein's Dream":
+            print(
+                wrap_colour(
+                    ANSI_BLUE,
+                    "You have an epiphany, you feel a surge of speed (+2s bonus time).",
+                )
+            )
+            player.bonus_time += 1
 
 
 def random_event(player: Player):
@@ -69,24 +77,24 @@ def random_event(player: Player):
     clear()
 
 
-def challenge(challenge_id):
+def challenge(challenge_id, player:Player):
     match challenge_id:
         case 3:
-            return console_challenge()
+            return console_challenge(player)
         case 4:
-            return riddle_challenge()
+            return riddle_challenge(player)
         case 5:
-            return hangman_challenge()
+            return hangman_challenge(player)
         case 6:
-            return wordle_challenge()
+            return wordle_challenge(player)
         case _:
             raise ValueError("Invalid challenge ID")
 
 
-def console_challenge():
+def console_challenge(player:Player):
     operations = ["+", "-", "*"]
     num_questions = 3
-    time_limit = 10  # seconds
+    time_limit = 10 + player.bonus_time  # seconds
 
     print(
         wrap_colour(
@@ -658,7 +666,7 @@ def type_fast_event(player: Player):
             "failure": "You tried to {action}, leaving you wide open! The arrow strikes you down!",
         },
     }
-    time_limit = 10
+    time_limit = 10 + player.bonus_time  # seconds
     chosen_action = random.choice(actions)
     print(wrap_colour(ANSI_BLUE, action_dialogues[chosen_action]["problem"]))
 
