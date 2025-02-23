@@ -56,6 +56,7 @@ def main():
     typewriter(
         "While you try to remember how to do your job you hear a tapping on the submarine window!"
     )
+    pygame.mixer.Sound("music/tapping-on-glass.mp3").play()
     typewriter(
         wrap_colour(
             ANSI_YELLOW, "Hello there traveler, are you here to fix the ghost rig!"
