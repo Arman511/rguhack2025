@@ -34,12 +34,7 @@ keys = [f"Key {i}" for i in range(1, 4)]
 pygame.mixer.init()
 
 
-def clear():
-    os.system("cls" if os.name == "nt" else "clear")
-
-
 def main():
-
     global player
     done_rooms = set()
     username = ""
@@ -65,10 +60,6 @@ def main():
         typewriter("The submarine implodes without you ever knowing it or why")
         player.player_minus_health(9999)
     typewriter(wrap_colour(ANSI_YELLOW, "I am the ghost of the rig and I will guide you through the rooms"))
-
-    
-
-    
     possible_actions = ["go", "inventory", "quit", "status", "help", "?"]
 
     while True:
@@ -113,13 +104,14 @@ def main():
             continue
 
         elif current_room.id == rooms[-1].id:
+            boss_event.set()
             result = boss_room()
-
             if not result:
                 input(wrap_colour(ANSI_RED, "\n\nYOU DIED - PRESS ENTER TO CONTINUE"))
             else:
                 input(wrap_colour(ANSI_GREEN, "\n\nYOU WIN - PRESS ENTER TO CONTINUE"))
             os.system("cls" if os.name == "nt" else "clear")
+            boss_event.clear()
             raise SystemExit
 
         action = input("What would you like to do? ").strip().lower()
@@ -160,6 +152,7 @@ def main():
 musics = ["music/track1.mp3", "music/track2.mp3",
           "music/track3.mp3", "music/track4.mp3", "music/track5.mp3"]
 stop_event = threading.Event()
+boss_event = threading.Event()
 
 
 if __name__ == "__main__":
@@ -167,6 +160,13 @@ if __name__ == "__main__":
     def play_music():
         try:
             while not stop_event.is_set():
+                if boss_event.is_set():
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("music/boss.mp3")
+                    pygame.mixer.music.set_volume(1.0)
+                    pygame.mixer.music.play()
+                    while pygame.mixer.music.get_busy() and not stop_event.is_set():
+                        pygame.time.Clock().tick(10)
                 track = random.choice(musics)
                 pygame.mixer.music.load(track)
                 pygame.mixer.music.set_volume(0.7)
