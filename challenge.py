@@ -51,7 +51,6 @@ def random_event(player: Player):
     probabilities.append(1 - (sum(probabilities)))  # nothing probability
     # print(events, probabilities)
     chosen_event = random.choices(events, probabilities)[0]
-
     if chosen_event == "nothing":
         return
     elif chosen_event == "type_fast":
@@ -64,6 +63,10 @@ def random_event(player: Player):
         eldritch_event(player)
     else:
         print(wrap_colour(ANSI_RED, "Error: Unknown event."))
+    from client import clear
+
+    input("Press enter to continue...")
+    clear()
 
 
 def challenge(challenge_id):
@@ -83,7 +86,7 @@ def challenge(challenge_id):
 def console_challenge():
     operations = ["+", "-", "*"]
     num_questions = 3
-    time_limit = 5  # seconds
+    time_limit = 10  # seconds
 
     print(
         wrap_colour(
@@ -150,9 +153,9 @@ class Riddle:
     answer: str = ""
     options: list[str] = []
 
-    def __init__(self, riddle: str, answers: str, options: list[str]):
+    def __init__(self, riddle: str, answer: str, options: list[str]):
         self.riddle = riddle
-        self.answers = answers
+        self.answer = answer
         self.options = options
 
 
@@ -377,13 +380,49 @@ def riddle_challenge(can_exit=True):
 def hangman_challenge(can_exit=True):
     stages = [
         """
+                
+                
+                
+                
+                
+                
+          =========
+        """,
+        """
+                |
+                |
+                |
+                |
+                |
+                |
+          =========
+        """,
+        """
+                +
+                |
+                |
+                |
+                |
+                |
+          =========
+        """,
+        """
+            +---+
+                |
+                |
+                |
+                |
+                |
+          =========
+        """,
+        """
             +---+
             |   |
                 |
                 |
                 |
                 |
-            =========
+          =========
         """,
         """
             +---+
@@ -392,7 +431,7 @@ def hangman_challenge(can_exit=True):
                 |
                 |
                 |
-            =========
+          =========
         """,
         """
             +---+
@@ -401,43 +440,70 @@ def hangman_challenge(can_exit=True):
             |   |
                 |
                 |
-            =========
+          =========
         """,
         """
             +---+
             |   |
             O   |
-            /|   |
+           /|   |
                 |
                 |
-            =========
+          =========
         """,
         """
             +---+
             |   |
             O   |
-            /|\\  |
+           /|\\  |
                 |
                 |
-            =========
+          =========
         """,
         """
             +---+
             |   |
             O   |
-            /|\\  |
-            /    |
+           /|\\  |
+           /    |
                 |
-            =========
+          =========
         """,
         """
             +---+
             |   |
             O   |
-            /|\\  |
-            / \\  |
+           /|\\  |
+           / \\  |
                 |
-            =========
+          =========
+        """,
+        """
+            +---+
+            |   |
+           [O]  |
+           /|\\  |
+           / \\  |
+                |
+          =========
+        """,
+        """
+            +---+
+            |   |
+           [O]  |
+          _/|\\  |
+           / \\  |
+                |
+          =========
+        """,
+        """
+            +---+
+            |   |
+           [O]  |
+          _/|\\_ |
+           / \\  |
+                |
+          =========
         """,
     ]
 

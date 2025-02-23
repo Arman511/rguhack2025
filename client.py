@@ -1,4 +1,5 @@
 import random
+import sys
 from boss_battle import boss_room
 from challenge import challenge, random_event, item_draw
 from colours import (
@@ -35,6 +36,7 @@ def clear():
 
 
 def main():
+    clear()
     print(wrap_colour(ANSI_RED, "MISSION: FIX OIL RIG"))
 
     username = ""
@@ -84,6 +86,7 @@ def main():
             done_rooms.add(current_room.id)
             print(wrap_colour(ANSI_PURPLE, "You SURVIVED"))
             player.current_room = 2
+            continue
 
         elif current_room.id == rooms[-1].id:
             result = boss_room()
@@ -131,18 +134,24 @@ def main():
 
 
 musics = ["music/track1.mp3", "music/track2.mp3"]
+stop_event = threading.Event()
+
 
 if __name__ == "__main__":
 
     def play_music():
-        pygame.mixer.init()
-
-        while True:
-            track = random.choice(musics)
-            pygame.mixer.music.load(track)
-            pygame.mixer.music.play()
-            while pygame.mixer.music.get_busy():
-                pygame.time.Clock().tick(10)
+        try:
+            pygame.mixer.init()
+            while not stop_event.is_set():
+                track = random.choice(musics)
+                pygame.mixer.music.load(track)
+                pygame.mixer.music.play()
+                while pygame.mixer.music.get_busy() and not stop_event.is_set():
+                    pygame.time.Clock().tick(10)
+            pygame.mixer.music.stop()
+        except Exception as e:
+            pygame.mixer.music.stop()
+            print(e)
 
     music_thread = threading.Thread(target=play_music, daemon=True)
     music_thread.start()
@@ -152,9 +161,13 @@ if __name__ == "__main__":
         except SystemExit:
             ans = input("Enter Y to play again: ")
             if ans.lower() != "y":
+                stop_event.set()
                 break
         except KeyboardInterrupt:
+            stop_event.set()
             break
 
+    stop_event.set()
     music_thread.join()
     print("Goodbye!")
+    sys.exit(0)

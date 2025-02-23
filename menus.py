@@ -9,7 +9,14 @@ class menus:
             print("Goodbye!")
             sys.exit()
         elif action == "inventory":
-            input(player.got_items(), "- PRESS ENTER TO CONTINUE")
+            items = player.got_items()
+            if items:
+                print("You have the following items:")
+                for item in items:
+                    print(f"- {item}")
+            else:
+                print("Your inventory is empty.")
+            input("PRESS ENTER TO CONTINUE")
         elif action == "look":
             input(current_room.description, "- PRESS ENTER TO CONTINUE")
         elif action == "help":

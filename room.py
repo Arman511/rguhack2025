@@ -12,10 +12,7 @@ class Room:
 
     def can_enter_room(self, player):
         for requirement in self.requirements:
-            if (
-                requirement not in player.inventory
-                and player.inventory[requirement] > 0
-            ):
+            if requirement not in player.inventory:
                 return False
         if player.current_room == self.previous_room or self.previous_room is None:
             return True

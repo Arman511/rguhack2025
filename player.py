@@ -9,19 +9,18 @@ class Player:
         self.score = 0
         self.karma = 0
         self.health = 3
-        with open("items.txt", "r") as f:
-            self.inventory = {}
-            for line in f:
-                item = line.strip()
-                if item in self.inventory:
-                    self.inventory[item] + 1
-                else:
-                    self.inventory[item] = 1
+        self.inventory = {}
 
         self.current_room = 0
 
     def add_score(self, score):
         self.score += score
+
+    def add_item(self, item):
+        if item in self.inventory:
+            self.inventory[item] += 1
+        else:
+            self.inventory[item] = 1
 
     def __str__(self):
         return f"{self.name} has {self.score} points"
