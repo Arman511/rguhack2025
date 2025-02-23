@@ -11,6 +11,15 @@ ANSI_PURPLE = "\u001b[1;35m"
 ANSI_CYAN = "\u001b[1;36m"
 ANSI_WHITE = "\u001b[37m"
 
+ANSI_BG_BLACK = "\u001b[40m"
+ANSI_BG_RED = "\u001b[41m"
+ANSI_BG_GREEN = "\u001b[42m"
+ANSI_BG_YELLOW = "\u001b[43m"
+ANSI_BG_BLUE = "\u001b[44m"
+ANSI_BG_PURPLE = "\u001b[45m"
+ANSI_BG_CYAN = "\u001b[46m"
+ANSI_BG_WHITE = "\u001b[47m"
+
 
 def wrap_colour(colour, text):
     return colour + text + ANSI_RESET

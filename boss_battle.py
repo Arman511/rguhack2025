@@ -77,13 +77,13 @@ def boss_room():
         print(wr("THE FLOOR IS ALIVE WITH WRITHING TENTACLES"), end=" ")
         print(wr("THE CEILING DRIPS WITH A THICK, BLACK ICHOR"))
         time.sleep(0.05)
-    clear()
     for _ in range(3):  # Pick three challenges
+        clear()
         chal = challenges.pop()
         if not call_challenge(chal):
             lose()
             return False
-        
+
     win()
     return True
 
