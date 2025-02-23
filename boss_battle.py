@@ -103,7 +103,7 @@ def boss_room(player: Player):
         )
         time.sleep(0.02)
     clear()
-    typewriter(wr("You have 2 minutes..."))
+    typewriter(wr("You have 5 minutes..."))
     time.sleep(1)
     now_time = time.time()
     for _ in range(3):  # Pick three challenges
@@ -114,7 +114,7 @@ def boss_room(player: Player):
             return False
     fin_time = time.time()
 
-    if fin_time - now_time > 120:
+    if fin_time - now_time > 60*5:
         lose()
         return False
     win()
