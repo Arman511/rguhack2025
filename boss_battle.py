@@ -1,6 +1,7 @@
 import time
 import random
 import getpass
+from player import Player
 from typing import Callable
 from colours import ANSI_GREEN, ANSI_PURPLE, ANSI_RED, ANSI_YELLOW, wr, wrap_colour
 from inspect import signature
@@ -23,10 +24,12 @@ CHALLENGES: list[Callable[[], bool]] = [
 ]
 
 
-def call_challenge(challenge_func):
+def call_challenge(challenge_func, player:Player):
     params = signature(challenge_func).parameters
-    if "can_exit" in params:
-        return challenge_func(can_exit=False)
+    if "is_boss_event" in params and "can_exit" in params:
+        return challenge_func(is_boss_event=True, can_exit=False, player=player)
+    elif "can_exit" in params:
+        return challenge_func(can_exit=False, player=player)
     return challenge_func()
 
 
@@ -64,7 +67,7 @@ def boss_dialogue():
     time.sleep(2)
 
 
-def boss_room():
+def boss_room(player:Player):
     """Main boss battle sequence."""
     boss_dialogue()
     random.shuffle(CHALLENGES)
@@ -85,7 +88,7 @@ def boss_room():
     for _ in range(3):  # Pick three challenges
         clear()
         challenge = CHALLENGES.pop()
-        if not call_challenge(challenge):
+        if not call_challenge(challenge, player):
             lose()
             return False
     fin_time = time.time()
