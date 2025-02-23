@@ -36,14 +36,15 @@ def item_draw(player: Player):
     chosen_item = random.choices(items, probabilities)[0]
 
     if chosen_item:
-        player.add_item_to_inventory(chosen_item)
-        print(
-            wrap_colour(
-                ANSI_GREEN,
-                f"You found a {chosen_item}! It has been added to your inventory.",
+        if chosen_item == "meat":
+            player.add_item_to_inventory(chosen_item)
+            print(
+                wrap_colour(
+                    ANSI_GREEN,
+                    f"You found a {chosen_item}! It has been added to your inventory.",
+                )
             )
-        )
-        if chosen_item == "Einstein's Dream":
+        elif chosen_item == "Einstein's Dream":
             print(
                 wrap_colour(
                     ANSI_BLUE,
