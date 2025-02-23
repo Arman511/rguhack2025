@@ -2,6 +2,8 @@ import os
 import sys
 import time
 
+import pygame
+
 TEXT_SPEED = 0.01  # Typing effect speed
 
 
@@ -30,3 +32,6 @@ def typewriter_rtl(text, speed=TEXT_SPEED, end="\n"):
         if char != " ":
             time.sleep(speed)
     print(end, flush=True)
+
+
+    

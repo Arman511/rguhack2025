@@ -194,7 +194,7 @@ def main():
                 and player.current_room != room.id
                 and room.id not in done_rooms
             }
-            typewriter(wrap_colour(ANSI_BLUE, "Possible rooms: "))
+            typewriter(wrap_colour(ANSI_BLUE, "\nPossible rooms: "))
             for room in possible_rooms.values():
                 typewriter(room)
             direction = input("Which direction would you like to go? ").strip().lower()

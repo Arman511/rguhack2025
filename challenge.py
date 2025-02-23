@@ -1,3 +1,4 @@
+import pygame
 from colours import (
     ANSI_RED,
     wrap_colour,
@@ -122,7 +123,7 @@ def console_challenge(player: Player):
 
         question = f"{num1} {operation} {num2}"
         answer = eval(question)
-
+        pygame.mixer.Sound("music/speed_timer_10s.mp3").play()
         print(wrap_colour(ANSI_YELLOW, f"Solve: {question}"))
         start_time = time.time()
         user_answer = input(
@@ -702,6 +703,7 @@ def type_fast_event(player: Player):
     chosen_action = random.choice(actions)
     print(wrap_colour(ANSI_BLUE, action_dialogues[chosen_action]["problem"]))
 
+    pygame.mixer.Sound("music/speed_timer_10s.mp3").play()
     start_time = time.time()
     user_action = input("Your action: ").strip().lower()
     end_time = time.time()
