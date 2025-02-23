@@ -189,4 +189,4 @@ def lose():
 
 
 # Uncomment to test
-# boss_room()
+# boss_room(Player)
