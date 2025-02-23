@@ -17,7 +17,7 @@ SUMBARINE_TOILET = Room(
 
 OIL_RIG_CORRIDOR = Room(
     "Oil Rig Corridor",
-    "You are now entering the oil rig console. The air begins to feel stuffy, a pungent smell violating your senses making you feel lightheaded. You encounter these odd rooms which identify themselves as different challenges, which one do you dare to enter?",
+    "You are now entering the oil rig corridor. The air begins to feel stuffy, a pungent smell violating your senses making you feel lightheaded. You encounter these odd rooms which identify themselves as different challenges, which one do you dare to enter?",
     2,
     previous_room=0,
 )

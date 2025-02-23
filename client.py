@@ -171,7 +171,10 @@ def main():
             os.system("cls" if os.name == "nt" else "clear")
             boss_event.clear()
             raise SystemExit
-
+        
+        for action in possible_actions:
+            print(wrap_colour(ANSI_YELLOW, action) + " - ", end="")
+        #print(possible_actions)
         action = input("What would you like to do? ").strip().lower()
 
         if action in possible_actions:

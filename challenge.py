@@ -105,6 +105,9 @@ def console_challenge(player: Player):
         )
     )
 
+    time.sleep(3)
+    clear()
+
     for _ in range(num_questions):
         num1 = random.randint(10, 99)
         num2 = random.randint(10, 99)
