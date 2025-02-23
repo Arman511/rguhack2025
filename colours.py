@@ -38,7 +38,7 @@ def wr(text):
             1, 5
         )  # Choose random length for each slice (1 or 2 or 3)
         random_colour = random.choice(colors)  # Select a random color
-        result += random_colour + text[i : i + random_number] + ANSI_RESET
+        result += random_colour + text[i: i + random_number] + ANSI_RESET
         i += random_number
     # for char in text:
     #     random_colour = random.choice(colors)  # Select a random color for each character
