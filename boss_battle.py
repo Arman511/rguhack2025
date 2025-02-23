@@ -52,5 +52,11 @@ def boss_room():
 
     return True
 
+<<<<<<< HEAD
 #TEST CODE
 boss_room()
+=======
+
+# TEST CODE
+# boss_room()
+>>>>>>> 569bfc5c36c696e4afbe75b1b80a0ff5ba8b1f57
