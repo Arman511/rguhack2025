@@ -84,7 +84,9 @@ def main():
                 print(wrap_colour(ANSI_BLUE, "You got a key!"))
 
             done_rooms.add(current_room.id)
-            print(wrap_colour(ANSI_PURPLE, "You SURVIVED"))
+            input(
+                wrap_colour(ANSI_PURPLE, "You SURVIVED") + "\n\nPRESS ENTER TO CONTINUE"
+            )
             player.current_room = 2
             continue
 

@@ -1,6 +1,8 @@
 import random
 from typing import Callable
-from colours import wrap_colour, ANSI_PURPLE, ANSI_BLUE, wrap_random_colour_per_character
+from colours import (
+    wrap_random_colour_per_character,
+)
 from inspect import signature
 
 
