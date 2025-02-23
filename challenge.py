@@ -1,3 +1,4 @@
+import os
 from colours import (
     ANSI_RED,
     wrap_colour,
@@ -63,7 +64,6 @@ def random_event(player: Player):
         eldritch_event(player)
     else:
         print(wrap_colour(ANSI_RED, "Error: Unknown event."))
-    from client import clear
 
     input("Press enter to continue...")
     clear()
@@ -146,6 +146,10 @@ def console_challenge():
         )
     )
     return True
+
+
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
 
 
 class Riddle:
@@ -378,7 +382,6 @@ def riddle_challenge(can_exit=True):
 
 
 def hangman_challenge(can_exit=True):
-    from client import clear
     from room_manager import OIL_RIG_HANGMAN_ROOM
 
     room = OIL_RIG_HANGMAN_ROOM
