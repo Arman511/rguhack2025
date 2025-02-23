@@ -56,7 +56,7 @@ def main():
     time.sleep(1)
     agree = input("Are you here to fix the haunted oil rig? (Y/N): ")
     if agree == "Y" or agree == "y":
-        typewriter(wrap_colour(ANSI_YELLOW, "Thank you so much!, ALL of my friends have been"), wrap_colour(ANSI_RED, "eaten"), wrap_colour(ANSI_YELLOW, "by the ghosts so it's great to hear someone is coming to sort it!"))
+        typewriter(wrap_colour(ANSI_YELLOW, "Thank you so much!, ALL of my friends have been") + wrap_colour(ANSI_RED, " eaten ") + wrap_colour(ANSI_YELLOW, "by the ghosts so it's great to hear someone is coming to sort it!"))
     else:
         typewriter("Then buzz off!")
         typewriter("You turn the submarine around and hit the gas")
@@ -74,7 +74,7 @@ def main():
     while True:
         clear()
         current_room = rooms[player.get_current_room()]
-        typewriter("Current room:", wrap_colour(ANSI_RED, current_room.name))
+        typewriter("Current room: " + wrap_colour(ANSI_RED, current_room.name))
         typewriter(current_room.description)
 
         if current_room.id in challenge_rooms:
@@ -169,6 +169,7 @@ if __name__ == "__main__":
             while not stop_event.is_set():
                 track = random.choice(musics)
                 pygame.mixer.music.load(track)
+                pygame.mixer.music.set_volume(0.7)
                 pygame.mixer.music.play()
                 while pygame.mixer.music.get_busy() and not stop_event.is_set():
                     pygame.time.Clock().tick(10)

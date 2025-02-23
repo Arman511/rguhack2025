@@ -2,7 +2,7 @@ import os
 import sys
 import time
 
-TEXT_SPEED = 0.02  # Typing effect speed
+TEXT_SPEED = 0.01  # Typing effect speed
 
 
 def clear():

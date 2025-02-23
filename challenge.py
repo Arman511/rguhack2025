@@ -21,7 +21,7 @@ with open("utils/data/all_answers.csv") as f:
 with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
 
-EVENT_CHANCES = {"type_fast": 0.1, "cat": 0.1, "dog": 0.1, "eldritch": 0.7}
+EVENT_CHANCES = {"type_fast": 0.1, "cat": 0.1, "dog": 0.1, "eldritch": 0.1}
 ITEM_DROP = {"meat": 0.1, "lasagna": 0.05}
 
 
@@ -753,10 +753,11 @@ def eldritch_event(player: Player):
         )
     )
     print(wrap_colour(ANSI_BLUE, "The figure offers you a choice: 'Heads or Tails?'"))
-    choice = input("Choose heads or tails: ").strip().lower()
-    if choice not in ["heads", "tails"]:
+    while True:
+        choice = input("Choose heads or tails: ").strip().lower()
+        if choice in ["heads", "tails"]:
+            break
         print(wrap_colour(ANSI_RED, "Invalid choice! The figure frowns."))
-        player.player_minus_health()
 
     flip_result = random.choice(["heads", "tails"])
     print(wrap_colour(ANSI_YELLOW, f"The coin flips... It lands on {flip_result}."))
@@ -777,8 +778,12 @@ def eldritch_event(player: Player):
                 "The figure's eyes glow with a malevolent light. 'You are a pathetic worm. Suffer your puny existence. (Your health is halved)'",
             )
         )
-        player.health = 2 if player.health // 2 < 2 else player.health // 2
-        player.player_minus_health()
+        result = player.health // 2
+        if result < 1:
+            player.health = 1
+        else:
+            player.health = result
+        player.player_minus_health(damage=0)
         return
 
 

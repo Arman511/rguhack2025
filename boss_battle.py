@@ -45,22 +45,22 @@ def boss_dialogue():
     time.sleep(1)
     clear()
 
-    typewriter(wr("What is your name?"))
+    typewriter(wr("What is your name? :D"))
     time.sleep(1)
     clear()
-    typewriter(wr("CAn I hAve yOUr"), 0.04)
-    typewriter(wrap_colour(ANSI_RED, "BLOOD"), 0.08)
-    time.sleep(0.75)
+    print(wr("What is your name? :("))
+    #typewriter(wrap_colour(ANSI_RED, "BLOOD"), 0.08)
+    time.sleep(0.05)
     clear()
-
-    input(wr("What is your name? "))
+    print(wr("What is your name? :D"))
+    input()
     typewriter(wr("is that your final answer?"))
     time.sleep(2)
     typewriter(wr(f"should it not be {getpass.getuser().capitalize()}?"))
     time.sleep(2)
     clear()
 
-    typewriter(wr("Actually... where are you? Hehe..."))
+    typewriter(wr("Actually... where are you?..."))
     time.sleep(2)
 
 
@@ -99,6 +99,7 @@ def boss_room():
 
 def win():
     """Handles the victory sequence."""
+    clear()
     typewriter(wr("THE ROOM TREMBLES AS THE ENTITY SHRIEKS IN DEFEAT"))
     time.sleep(1.5)
     typewriter(wr("THE COUNTLESS HANDS RELEASE THEIR GRIP, RECOILING INTO THE VOID"))
@@ -137,4 +138,4 @@ def lose():
 
 
 # Uncomment to test
-#boss_room()
+# boss_room()

@@ -8,7 +8,7 @@ class Player:
         self.name = name
         self.score = 0
         self.karma = 0
-        self.health = 3
+        self.health = 5
         self.inventory = {}
 
         self.current_room = 0
