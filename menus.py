@@ -19,7 +19,7 @@ class menus:
             input("PRESS ENTER TO CONTINUE")
         elif action == "look":
             input(f"{current_room.description} - PRESS ENTER TO CONTINUE")
-        elif action == "help":
+        elif action == "help" or action == "?":
             input(
                 "You can do the following actions: go, look, inventory, quit, help -- PRESS ENTER TO CONTINUE"
             )

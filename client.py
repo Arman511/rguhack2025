@@ -47,7 +47,7 @@ def main():
         username = username.strip()
 
     player = Player(username)
-    possible_actions = ["go", "look", "inventory", "quit", "status", "help"]
+    possible_actions = ["go", "look", "inventory", "quit", "status", "help", "?"]
 
     while True:
         clear()
