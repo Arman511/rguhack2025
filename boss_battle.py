@@ -32,7 +32,7 @@ def call_challenge(challenge_func):
 
 def boss_room():
     print(wrap_random_colour_per_character("As you enter the room you notice"), end=" ")
-    input("Press enter to continue...")
+    input("\nPress enter to continue...")
     random.shuffle(challenges)
 
     for _ in range(3):  # Pick three challenges
@@ -42,5 +42,6 @@ def boss_room():
 
     return True
 
-#TEST CODE
-#boss_room()
+
+# TEST CODE
+# boss_room()
