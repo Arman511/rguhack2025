@@ -39,22 +39,10 @@ def boss_room():
     print("As you enter the room you notice a ", end="")
     print(wr("""strange silvery creture made of many handss, grasping coolant pipe for the engine"""), end=" ")
     print("You know from experice that this", end=" ")
-    print(        wr(
-            "anomaly from between the walls is the BOSS of this place"
-        ),
-    )
-    print(
-        wr(
-            "h-h-hEllo friend... coMe closer I woUld like to geT a cLoser look at THOUTH formmMMM"
-        ),
-        end=" ",
-    )
+    print(wr("anomaly from between the walls is the BOSS of this place"))
+    print(wr("h-h-hEllo friend... coMe closer I woUld like to geT a cLoser look at THOUTH formmMMM"), end=" ")
     print(wr("/'"), end=" ")
-    input(
-        wr(
-            "PLEASE DO NOT BE AFRAID... I would like to ask a few questions to get to know you BETTER •ᴗ•"
-        )
-    )
+    input(wr("PLEASE DO NOT BE AFRAID... I would like to ask a few questions to get to know you BETTER •ᴗ•"))
     time.sleep(1)
     clear()
     print(wr("What is your name?"))
