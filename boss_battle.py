@@ -37,7 +37,7 @@ def clear():
 
 def boss_room():
     print("As you enter the room you notice a ", end="")
-    print(wr("""strange silvery creture made of many handss, grasping coolant pipe for the engine"""), end=" ")
+    print(wr("""strange silvery creature made of many handsSS, grasping the coolant pipes for the engine"""), end=" ")
     print("You know from experice that this", end=" ")
     print(wr("anomaly from between the walls is the BOSS of this place"))
 
