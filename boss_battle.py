@@ -26,11 +26,15 @@ CHALLENGES: list[Callable[[Player], bool]] = [
 
 def call_challenge(challenge_func, player: Player):
     params = signature(challenge_func).parameters
-    if "is_boss_event" in params and "can_exit" in params:
-        return challenge_func(is_boss_event=True, can_exit=False, player=player)
-    elif "can_exit" in params:
-        return challenge_func(can_exit=False, player=player)
-    return challenge_func()
+    try:
+        if "is_boss_event" in params and "can_exit" in params and "player" in params:
+            return challenge_func(is_boss_event=True, can_exit=False, player=player)
+        elif "can_exit" in params and "player" in params:
+            return challenge_func(can_exit=False, player=player)
+        return challenge_func()
+    except Exception as e:
+        print(f"Error in challenge function {challenge_func.__name__}: {e}")
+        return False
 
 
 def boss_dialogue():
@@ -100,6 +104,7 @@ def boss_room(player: Player):
         time.sleep(0.02)
     clear()
     typewriter(wr("You have 2 minutes..."))
+    time.sleep(1)
     now_time = time.time()
     for _ in range(3):  # Pick three challenges
         clear()

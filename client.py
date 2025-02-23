@@ -32,9 +32,13 @@ challenge_rooms = [3, 4, 5, 6]
 key_not_in_room = random.choice(challenge_rooms)
 keys = [f"Key {i}" for i in range(1, 4)]
 pygame.mixer.init()
+stop_event = threading.Event()
+boss_event = threading.Event()
 
 
 def main():
+    boss_event.clear()
+    stop_event.clear()
     global player
     done_rooms = set()
     username = ""
@@ -177,12 +181,9 @@ musics = [
     "music/track4.mp3",
     "music/track5.mp3",
 ]
-stop_event = threading.Event()
-boss_event = threading.Event()
 
 
 if __name__ == "__main__":
-
     def play_music():
         try:
             while not stop_event.is_set():
@@ -191,13 +192,13 @@ if __name__ == "__main__":
                     pygame.mixer.music.load("music/boss.mp3")
                     pygame.mixer.music.set_volume(1.0)
                     pygame.mixer.music.play()
-                    while pygame.mixer.music.get_busy() and not stop_event.is_set():
+                    while pygame.mixer.music.get_busy() and not stop_event.is_set() and boss_event.is_set():
                         pygame.time.Clock().tick(10)
                 track = random.choice(musics)
                 pygame.mixer.music.load(track)
                 pygame.mixer.music.set_volume(0.7)
                 pygame.mixer.music.play()
-                while pygame.mixer.music.get_busy() and not stop_event.is_set():
+                while pygame.mixer.music.get_busy() and not stop_event.is_set() and not boss_event.is_set():
                     pygame.time.Clock().tick(10)
         except Exception as e:
             pygame.mixer.music.stop()
