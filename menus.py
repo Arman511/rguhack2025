@@ -17,12 +17,12 @@ class menus:
             else:
                 print("Your inventory is empty.")
             input("PRESS ENTER TO CONTINUE")
-        elif action == "look":
-            input(f"{current_room.description} - PRESS ENTER TO CONTINUE")
-            # TODO do something with depth, romm manager
+        # elif action == "look":
+        #     input(f"{current_room.description} - PRESS ENTER TO CONTINUE")
+        #     # TODO do something with depth, romm manager
         elif action == "help" or action == "?":
             input(
-                "You can do the following actions: go, look, inventory, quit, help -- PRESS ENTER TO CONTINUE"
+                "You can do the following actions: go, inventory, quit, help -- PRESS ENTER TO CONTINUE"
             )
         elif action == "suicide":
             print(
