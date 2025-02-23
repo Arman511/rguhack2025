@@ -22,7 +22,7 @@ class menus:
         #     # TODO do something with depth, romm manager
         elif action == "help" or action == "?":
             input(
-                "You can do the following actions: go, inventory, quit, help -- PRESS ENTER TO CONTINUE"
+                "You can do the following actions: go, status, inventory, quit, help -- PRESS ENTER TO CONTINUE"
             )
         elif action == "suicide":
             print(

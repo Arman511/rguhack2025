@@ -69,7 +69,7 @@ def main():
             + wrap_colour(ANSI_RED, " eaten ")
             + wrap_colour(
                 ANSI_YELLOW,
-                "by the ghosts so it's great to hear someone is coming to sort it!",
+                "by the ghosts so it's great to hear someone is coming to sort it!\nI will guide you to a helpful spirit",
             )
         )
     else:
@@ -79,12 +79,44 @@ def main():
         pygame.mixer.Sound("music/bang.mp3").play()
         typewriter("The submarine implodes without you ever knowing it or why")
         player.player_minus_health(9999)
+    input("PRESS ENTER TO CONTINUE")
+    clear()
     typewriter(
         wrap_colour(
             ANSI_YELLOW,
             "I am the ghost of the rig and I will guide you through the rooms",
         )
     )
+    time.sleep(1)
+    typewriter(
+        wrap_colour(
+            ANSI_YELLOW,
+            "The possible actions are: go, inventory, quit, status, help, ?",
+        )
+    )
+    time.sleep(1)
+    typewriter(
+        wrap_colour(
+            ANSI_YELLOW,
+            "You can only go to rooms that are connected to the room you are in",
+        )
+    )
+    time.sleep(1)
+    typewriter(
+        wrap_colour(
+            ANSI_YELLOW,
+            "You cannot go to a room you have completed, if you go back to a room it will reset",
+        )
+    )
+    time.sleep(1)
+    typewriter(
+        wrap_colour(
+            ANSI_YELLOW,
+            "You can only go to a room if you have the keys for it, so keep and eye out for them for new doorways opening for you",
+        )
+    )
+    input("PRESS ENTER TO CONTINUE")
+    clear()
     possible_actions = ["go", "inventory", "quit", "status", "help", "?"]
 
     while True:
@@ -184,6 +216,7 @@ musics = [
 
 
 if __name__ == "__main__":
+
     def play_music():
         try:
             while not stop_event.is_set():
@@ -192,13 +225,21 @@ if __name__ == "__main__":
                     pygame.mixer.music.load("music/boss.mp3")
                     pygame.mixer.music.set_volume(1.0)
                     pygame.mixer.music.play()
-                    while pygame.mixer.music.get_busy() and not stop_event.is_set() and boss_event.is_set():
+                    while (
+                        pygame.mixer.music.get_busy()
+                        and not stop_event.is_set()
+                        and boss_event.is_set()
+                    ):
                         pygame.time.Clock().tick(10)
                 track = random.choice(musics)
                 pygame.mixer.music.load(track)
                 pygame.mixer.music.set_volume(0.7)
                 pygame.mixer.music.play()
-                while pygame.mixer.music.get_busy() and not stop_event.is_set() and not boss_event.is_set():
+                while (
+                    pygame.mixer.music.get_busy()
+                    and not stop_event.is_set()
+                    and not boss_event.is_set()
+                ):
                     pygame.time.Clock().tick(10)
         except Exception as e:
             pygame.mixer.music.stop()

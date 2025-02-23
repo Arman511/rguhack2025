@@ -601,8 +601,13 @@ def wordle_challenge(player: Player, can_exit=True):
             "You enter the wordle chamber, a mystical voice echoes: 'Guess the secret word or face the consequences!'",
         )
     )
+    user_words: list[str] = []
 
     for attempt in range(6):
+        if user_words:
+            print(wrap_colour(ANSI_YELLOW, "Previous guesses:"))
+        for word in user_words[:-1]:
+            print(word)
         print(f"Guesses remaining: {attempts_remaining}")
         if can_exit:
             user_guess = (
@@ -613,6 +618,10 @@ def wordle_challenge(player: Player, can_exit=True):
         else:
             user_guess = input("Enter your guess: ").strip().lower()
         clear()
+        if not user_guess:
+            print(wrap_colour(ANSI_RED, "Invalid guess, try again"))
+            attempt -= 1
+            continue
         if user_guess == "exit" and can_exit:
             return "EXIT"
         if user_guess not in GUESS_SET:
@@ -620,14 +629,19 @@ def wordle_challenge(player: Player, can_exit=True):
             continue
         response = wordle_response(answer, user_guess)
         print("Result: ", end="")
+        ans = ""
         for i, char in zip(response, user_guess):
             if i == "0":
+                ans += wrap_colour(ANSI_RED, char.upper()) + " "
                 print(wrap_colour(ANSI_RED, char.upper()), end=" ")
             elif i == "1":
+                ans += wrap_colour(ANSI_YELLOW, char.upper()) + " "
                 print(wrap_colour(ANSI_YELLOW, char.upper()), end=" ")
             elif i == "2":
+                ans += wrap_colour(ANSI_GREEN, char.upper()) + " "
                 print(wrap_colour(ANSI_GREEN, char.upper()), end=" ")
         print()
+        user_words.append(ans)
         if response == "22222":
             print(
                 wrap_colour(
