@@ -119,6 +119,17 @@ def win():
     typewriter(wrap_colour(ANSI_GREEN, "CONGRATULATIONS, YOU HAVE CLEANSED THIS PLACE OF CHAOS"))
     time.sleep(2)
     typewriter(wrap_colour(ANSI_YELLOW, "THE OIL MUST FLOW"))
+    input("PRESS ENTER TO CONTINUE")
+
+    for _ in range(100):
+        print(wr("THE WALLS HAVE EYES THAT WATCH YOUR EVERY MOVE THE FLOOR IS ALIVE WITH WRITHING TENTACLES THE CEILING DRIPS WITH A THICK, BLACK ICHOR"))
+        time.sleep(0.02)
+    clear()
+
+    for _ in range(100):
+        print(wrap_colour(ANSI_YELLOW, "THE OIL MUST FLOW"), wrap_colour(ANSI_RED, "THE OIL MUST FLOW"), wrap_colour(ANSI_PURPLE, "THE OIL MUST FLOW"))
+        time.sleep(0.02)
+    clear()
 
 
 def lose():
