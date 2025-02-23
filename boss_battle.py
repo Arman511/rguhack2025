@@ -59,6 +59,5 @@ def boss_room():
 
     return True
 
-
-# TEST CODE
-# boss_room()
+#TEST CODE
+#boss_room()
