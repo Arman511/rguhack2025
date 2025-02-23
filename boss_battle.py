@@ -1,8 +1,6 @@
-import os
 import time
 import random
 import getpass
-import sys
 from typing import Callable
 from colours import ANSI_GREEN, ANSI_PURPLE, ANSI_RED, ANSI_YELLOW, wr, wrap_colour
 from inspect import signature
@@ -13,6 +11,7 @@ from challenge import (
     hangman_challenge,
     cipher_challenge,
 )
+from shared import clear, typewriter
 
 # Define constants
 CHALLENGES: list[Callable[[], bool]] = [
@@ -22,7 +21,6 @@ CHALLENGES: list[Callable[[], bool]] = [
     hangman_challenge,
     cipher_challenge,
 ]
-TEXT_SPEED = 0.02  # Typing effect speed
 
 
 def call_challenge(challenge_func):
@@ -30,20 +28,6 @@ def call_challenge(challenge_func):
     if "can_exit" in params:
         return challenge_func(can_exit=False)
     return challenge_func()
-
-
-def clear():
-    os.system("cls" if os.name == "nt" else "clear")
-
-
-def typewriter(text, speed=TEXT_SPEED, end="\n"):
-    """Prints text with a typewriter effect."""
-    for char in text:
-        sys.stdout.write(char)
-        sys.stdout.flush()
-        # time.sleep(0)
-        time.sleep(speed)
-    print(end, flush=True)
 
 
 def boss_dialogue():

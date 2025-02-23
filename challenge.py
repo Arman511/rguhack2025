@@ -1,4 +1,3 @@
-import os
 from colours import (
     ANSI_RED,
     wrap_colour,
@@ -15,6 +14,7 @@ import base64
 import random
 import time
 
+from shared import clear
 with open("utils/data/all_answers.csv") as f:
     ANSWER_LIST = [line.strip() for line in f]
 
@@ -146,10 +146,6 @@ def console_challenge():
         )
     )
     return True
-
-
-def clear():
-    os.system("cls" if os.name == "nt" else "clear")
 
 
 class Riddle:
