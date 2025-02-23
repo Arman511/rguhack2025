@@ -30,13 +30,14 @@ player = None
 rooms = get_rooms()
 challenge_rooms = [3, 4, 5, 6]
 key_not_in_room = random.choice(challenge_rooms)
-keys = [f"Key {i}" for i in range(1, 4)]
+keys: list[str] = []
 pygame.mixer.init()
 stop_event = threading.Event()
 boss_event = threading.Event()
 
 
 def main():
+    keys = [f"Key {i}" for i in range(1, 4)]
     boss_event.clear()
     stop_event.clear()
     global player
