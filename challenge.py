@@ -606,7 +606,7 @@ def wordle_challenge(player: Player, can_exit=True):
     for attempt in range(6):
         if user_words:
             print(wrap_colour(ANSI_YELLOW, "Previous guesses:"))
-        for word in user_words:
+        for word in user_words[:-1]:
             print(word)
         print(f"Guesses remaining: {attempts_remaining}")
         if can_exit:
