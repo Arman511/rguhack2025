@@ -50,7 +50,7 @@ def main():
     possible_actions = ["go", "look", "inventory", "quit", "status", "help"]
 
     while True:
-        print("\n")
+        clear()
         current_room = rooms[player.get_current_room()]
         print("Current room:", wrap_colour(ANSI_RED, current_room.name))
         print(current_room.description)

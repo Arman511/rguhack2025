@@ -378,6 +378,10 @@ def riddle_challenge(can_exit=True):
 
 
 def hangman_challenge(can_exit=True):
+    from client import clear
+    from room_manager import OIL_RIG_HANGMAN_ROOM
+
+    room = OIL_RIG_HANGMAN_ROOM
     stages = [
         """
                 
@@ -510,6 +514,7 @@ def hangman_challenge(can_exit=True):
     secret = random.choice(ANSWER_LIST).upper()
     guessed = set()
     mistakes = 0
+    mistakes_list = []
 
     print(
         wrap_colour(
@@ -519,6 +524,9 @@ def hangman_challenge(can_exit=True):
     )
 
     while mistakes < len(stages) - 1:
+        clear()
+        print("Current room:", wrap_colour(ANSI_RED, room.name))
+        print(room.description)
         display = [c if c in guessed else "_" for c in secret]
         print(wrap_colour(ANSI_YELLOW, stages[mistakes]))
         print(wrap_colour(ANSI_GREEN, "Word: " + " ".join(display)))
@@ -530,15 +538,23 @@ def hangman_challenge(can_exit=True):
                 )
             )
             return True
+        print(wrap_colour(ANSI_YELLOW, "Mistakes: " + " ".join(mistakes_list)))
         guess = input(
             wrap_colour(ANSI_YELLOW, "Guess a letter(Press exit to exit): ")
         ).upper()
         if guess.lower() == "exit" and can_exit:
             return "EXIT"
+        if len(guess) != 1 or not guess.isalpha():
+            print(wrap_colour(ANSI_RED, "Invalid guess, try again"))
+            continue
+        if guess in guessed or guess in mistakes_list:
+            print(wrap_colour(ANSI_RED, f"You already guessed {guess}"))
+            continue
         if guess in secret:
             guessed.add(guess)
         else:
             mistakes += 1
+            mistakes_list.append(guess)
 
     print(wrap_colour(ANSI_RED, stages[mistakes]))
     print(wrap_colour(ANSI_RED, "Word: " + secret))
@@ -552,9 +568,15 @@ def hangman_challenge(can_exit=True):
 
 def wordle_challenge(can_exit=True):
     # pick a random wordle answer
+    from client import clear
+    from room_manager import OIL_RIG_WORDLE_ROOM
+
+    room = OIL_RIG_WORDLE_ROOM
     answer = random.choice(ANSWER_LIST)
     attempts_remaining = 6
-
+    clear()
+    print("Current room:", wrap_colour(ANSI_RED, room.name))
+    print(room.description)
     print(
         wrap_colour(
             ANSI_BLUE,
@@ -572,12 +594,14 @@ def wordle_challenge(can_exit=True):
             )
         else:
             user_guess = input("Enter your guess: ").strip().lower()
+        clear()
         if user_guess == "exit" and can_exit:
             return "EXIT"
         if user_guess not in GUESS_SET:
             print(wrap_colour(ANSI_RED, "Invalid guess, try again"))
             continue
         response = wordle_response(answer, user_guess)
+        print("Result: ", end="")
         for i, char in zip(response, user_guess):
             if i == "0":
                 print(wrap_colour(ANSI_RED, char.upper()), end=" ")
