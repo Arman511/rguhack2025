@@ -29,7 +29,7 @@ def item_draw(player: Player):
     items = list(ITEM_DROP.keys())
     probabilities = list(ITEM_DROP.values())
     probabilities.append(1 - sum(probabilities))  # probability for no item
-    items.append(None)  # no item
+    items.append("")  # no item
 
     chosen_item = random.choices(items, probabilities)[0]
 
