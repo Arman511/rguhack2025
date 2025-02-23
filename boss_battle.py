@@ -15,7 +15,7 @@ from challenge import (
 from shared import clear, typewriter
 
 # Define constants
-CHALLENGES: list[Callable[[], bool]] = [
+CHALLENGES: list[Callable[[Player], bool]] = [
     console_challenge,
     riddle_challenge,
     wordle_challenge,
@@ -24,7 +24,7 @@ CHALLENGES: list[Callable[[], bool]] = [
 ]
 
 
-def call_challenge(challenge_func, player:Player):
+def call_challenge(challenge_func, player: Player):
     params = signature(challenge_func).parameters
     if "is_boss_event" in params and "can_exit" in params:
         return challenge_func(is_boss_event=True, can_exit=False, player=player)
@@ -36,15 +36,27 @@ def call_challenge(challenge_func, player:Player):
 def boss_dialogue():
     """Handles the eerie introduction from the boss."""
     typewriter("As you enter the room, you notice a...", 0.03)
-    typewriter(wr("strange silvery creature made of many hands")+wrap_colour(ANSI_RED, "SS,"))
+    typewriter(
+        wr("strange silvery creature made of many hands") + wrap_colour(ANSI_RED, "SS,")
+    )
     typewriter(wr("grasping the coolant pipes for the engine."))
-    typewriter(wr("You know from experience that this anomaly is the BOSS of this place."))
+    typewriter(
+        wr("You know from experience that this anomaly is the BOSS of this place.")
+    )
 
     time.sleep(2)
     clear()
-    typewriter(wr("h-h-hEllo friend... coMe closer I woUld like to geT a cLoser look at THOUTH formmMMM"))
+    typewriter(
+        wr(
+            "h-h-hEllo friend... coMe closer I woUld like to geT a cLoser look at THOUTH formmMMM"
+        )
+    )
     time.sleep(1.5)
-    typewriter(wr("PLEASE DO NOT BE AFRAID... I would like to ask a few questions to get to know you BETTER •ᴗ•, (Y/y): "))
+    typewriter(
+        wr(
+            "PLEASE DO NOT BE AFRAID... I would like to ask a few questions to get to know you BETTER •ᴗ•, (Y/y): "
+        )
+    )
     time.sleep(1)
     clear()
 
@@ -52,7 +64,7 @@ def boss_dialogue():
     time.sleep(1)
     clear()
     print(wr("What is your name? :("))
-    #typewriter(wrap_colour(ANSI_RED, "BLOOD"), 0.08)
+    # typewriter(wrap_colour(ANSI_RED, "BLOOD"), 0.08)
     time.sleep(0.05)
     clear()
     print(wr("What is your name? :D"))
@@ -67,7 +79,7 @@ def boss_dialogue():
     time.sleep(2)
 
 
-def boss_room(player:Player):
+def boss_room(player: Player):
     """Main boss battle sequence."""
     boss_dialogue()
     random.shuffle(CHALLENGES)
@@ -80,7 +92,11 @@ def boss_room(player:Player):
 
     clear()
     for _ in range(100):
-        print(wr("THE WALLS HAVE EYES THAT WATCH YOUR EVERY MOVE THE FLOOR IS ALIVE WITH WRITHING TENTACLES THE CEILING DRIPS WITH A THICK, BLACK ICHOR"))
+        print(
+            wr(
+                "THE WALLS HAVE EYES THAT WATCH YOUR EVERY MOVE THE FLOOR IS ALIVE WITH WRITHING TENTACLES THE CEILING DRIPS WITH A THICK, BLACK ICHOR"
+            )
+        )
         time.sleep(0.02)
     clear()
     typewriter(wr("You have 2 minutes..."))
@@ -117,20 +133,36 @@ def win():
     typewriter(wr("'...wE shaLl mEEt AgAiN...'"))
     time.sleep(2)
 
-    typewriter(wrap_colour(ANSI_PURPLE, "YOU STEP FORWARD, LEAVING THIS PLACE BEHIND... FOR NOW"))
+    typewriter(
+        wrap_colour(
+            ANSI_PURPLE, "YOU STEP FORWARD, LEAVING THIS PLACE BEHIND... FOR NOW"
+        )
+    )
     time.sleep(2)
-    typewriter(wrap_colour(ANSI_GREEN, "CONGRATULATIONS, YOU HAVE CLEANSED THIS PLACE OF CHAOS"))
+    typewriter(
+        wrap_colour(
+            ANSI_GREEN, "CONGRATULATIONS, YOU HAVE CLEANSED THIS PLACE OF CHAOS"
+        )
+    )
     time.sleep(2)
     typewriter(wrap_colour(ANSI_YELLOW, "THE OIL MUST FLOW"))
     input("PRESS ENTER TO CONTINUE")
 
     for _ in range(100):
-        print(wr("THE WALLS HAVE EYES THAT WATCH YOUR EVERY MOVE THE FLOOR IS ALIVE WITH WRITHING TENTACLES THE CEILING DRIPS WITH A THICK, BLACK ICHOR"))
+        print(
+            wr(
+                "THE WALLS HAVE EYES THAT WATCH YOUR EVERY MOVE THE FLOOR IS ALIVE WITH WRITHING TENTACLES THE CEILING DRIPS WITH A THICK, BLACK ICHOR"
+            )
+        )
         time.sleep(0.02)
     clear()
 
     for _ in range(100):
-        print(wrap_colour(ANSI_YELLOW, "THE OIL MUST FLOW"), wrap_colour(ANSI_RED, "THE OIL MUST FLOW"), wrap_colour(ANSI_PURPLE, "THE OIL MUST FLOW"))
+        print(
+            wrap_colour(ANSI_YELLOW, "THE OIL MUST FLOW"),
+            wrap_colour(ANSI_RED, "THE OIL MUST FLOW"),
+            wrap_colour(ANSI_PURPLE, "THE OIL MUST FLOW"),
+        )
         time.sleep(0.02)
     clear()
 

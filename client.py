@@ -45,13 +45,29 @@ def main():
     clear()
 
     typewriter(wrap_colour(ANSI_RED, "MISSION: FIX THE OIL RIG"))
-    typewriter("The subarmarine is decending to the ocean floor and you are about to enter the oil rig.")
-    typewriter("While you try to remember how to do your job you hear a tapping on the submarine window!")
-    typewriter(wrap_colour(ANSI_YELLOW, "Hello there traveler, are you here to fix the ghost rig!") + " the angular fish blubs")
+    typewriter(
+        "The subarmarine is decending to the ocean floor and you are about to enter the oil rig."
+    )
+    typewriter(
+        "While you try to remember how to do your job you hear a tapping on the submarine window!"
+    )
+    typewriter(
+        wrap_colour(
+            ANSI_YELLOW, "Hello there traveler, are you here to fix the ghost rig!"
+        )
+        + " the angular fish blubs"
+    )
     time.sleep(1)
     agree = input("Are you here to fix the haunted oil rig? (Y/N): ")
     if agree == "Y" or agree == "y":
-        typewriter(wrap_colour(ANSI_YELLOW, "Thank you so much!, ALL of my friends have been") + wrap_colour(ANSI_RED, " eaten ") + wrap_colour(ANSI_YELLOW, "by the ghosts so it's great to hear someone is coming to sort it!"))
+        typewriter(
+            wrap_colour(ANSI_YELLOW, "Thank you so much!, ALL of my friends have been")
+            + wrap_colour(ANSI_RED, " eaten ")
+            + wrap_colour(
+                ANSI_YELLOW,
+                "by the ghosts so it's great to hear someone is coming to sort it!",
+            )
+        )
     else:
         typewriter("Then buzz off!")
         typewriter("You turn the submarine around and hit the gas")
@@ -59,7 +75,12 @@ def main():
         pygame.mixer.Sound("music/bang.mp3").play()
         typewriter("The submarine implodes without you ever knowing it or why")
         player.player_minus_health(9999)
-    typewriter(wrap_colour(ANSI_YELLOW, "I am the ghost of the rig and I will guide you through the rooms"))
+    typewriter(
+        wrap_colour(
+            ANSI_YELLOW,
+            "I am the ghost of the rig and I will guide you through the rooms",
+        )
+    )
     possible_actions = ["go", "inventory", "quit", "status", "help", "?"]
 
     while True:
@@ -149,8 +170,13 @@ def main():
             player.change_room(direction)
 
 
-musics = ["music/track1.mp3", "music/track2.mp3",
-          "music/track3.mp3", "music/track4.mp3", "music/track5.mp3"]
+musics = [
+    "music/track1.mp3",
+    "music/track2.mp3",
+    "music/track3.mp3",
+    "music/track4.mp3",
+    "music/track5.mp3",
+]
 stop_event = threading.Event()
 boss_event = threading.Event()
 

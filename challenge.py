@@ -15,6 +15,7 @@ import random
 import time
 
 from shared import clear
+
 with open("utils/data/all_answers.csv") as f:
     ANSWER_LIST = [line.strip() for line in f]
 
@@ -77,7 +78,7 @@ def random_event(player: Player):
     clear()
 
 
-def challenge(challenge_id, player:Player):
+def challenge(challenge_id, player: Player):
     match challenge_id:
         case 3:
             return console_challenge(player)
@@ -91,7 +92,7 @@ def challenge(challenge_id, player:Player):
             raise ValueError("Invalid challenge ID")
 
 
-def console_challenge(player:Player):
+def console_challenge(player: Player):
     operations = ["+", "-", "*"]
     num_questions = 3
     time_limit = 10 + player.bonus_time  # seconds
@@ -134,12 +135,12 @@ def console_challenge(player:Player):
             return False
 
         try:
-            user_answer = int(user_answer)
+            user_answer_int = int(user_answer)
         except ValueError:
             print(wrap_colour(ANSI_RED, "Invalid input! The guardians are displeased."))
             return False
 
-        if user_answer != answer:
+        if user_answer_int != answer:
             print(
                 wrap_colour(
                     ANSI_RED, "Wrong answer! The ground trembles as the guardians stir."
@@ -346,7 +347,7 @@ riddles = [
 ]
 
 
-def riddle_challenge(player:Player, can_exit=True):
+def riddle_challenge(player: Player, can_exit=True):
     riddle = random.choice(riddles)
     print(
         wrap_colour(
@@ -364,11 +365,11 @@ def riddle_challenge(player:Player, can_exit=True):
         print(f"{i} - {option}")
     ans = -1
     while ans < 0 or ans > len(shuffled) - 1:
-        ans = input("Enter option: ").strip()
-        if ans.lower() == "exit" and can_exit:
+        ans_text = input("Enter option: ").strip()
+        if ans_text.lower() == "exit" and can_exit:
             return "EXIT"
         try:
-            ans = int(ans)
+            ans = int(ans_text)
         except Exception:
             print(wrap_colour(ANSI_RED, "INVALID INPUT"))
             ans = -1
@@ -385,17 +386,19 @@ def riddle_challenge(player:Player, can_exit=True):
     return False
 
 
-def hangman_challenge(player:Player, can_exit=True, is_boss_event=False):
+def hangman_challenge(player: Player, can_exit=True, is_boss_event=False):
     from room_manager import OIL_RIG_HANGMAN_ROOM
+
     if not is_boss_event:
         # you find a dead body on the gallows add meat to inventory
         player.add_item_to_inventory("meat")
         print(
             wrap_colour(
-            ANSI_GREEN,
-            "You find a dead body hanging from the gallows. 'Free meat' you think to yourself."),
-            wrap_colour(
-            ANSI_BLUE, "(Meat has been added to your inventory)"),)
+                ANSI_GREEN,
+                "You find a dead body hanging from the gallows. 'Free meat' you think to yourself.",
+            ),
+            wrap_colour(ANSI_BLUE, "(Meat has been added to your inventory)"),
+        )
     room = OIL_RIG_HANGMAN_ROOM
     stages = [
         """
@@ -529,7 +532,7 @@ def hangman_challenge(player:Player, can_exit=True, is_boss_event=False):
     secret = random.choice(ANSWER_LIST).upper()
     guessed = set()
     mistakes = 0
-    mistakes_list = []
+    mistakes_list: list[str] = []
 
     print(
         wrap_colour(
@@ -581,7 +584,7 @@ def hangman_challenge(player:Player, can_exit=True, is_boss_event=False):
     return False
 
 
-def wordle_challenge(can_exit=True):
+def wordle_challenge(player: Player, can_exit=True):
     # pick a random wordle answer
     from client import clear
     from room_manager import OIL_RIG_WORDLE_ROOM
@@ -867,7 +870,7 @@ def morse_cipher(text):
     return " ".join(morse_dict[char] for char in text.upper() if char in morse_dict)
 
 
-def cipher_challenge(can_exit=False):
+def cipher_challenge(player: Player, can_exit=False):
     ciphers = ["Base64", "Caesar Shift", "Binary", "Morse Code"]
     chosen_cipher = random.choice(ciphers)
     message = random.choice(ANSWER_LIST)
