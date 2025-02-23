@@ -17,7 +17,7 @@ def wrap_colour(colour, text):
 
 
 # List of all colors
-colors = [ANSI_RED, ANSI_GREEN, ANSI_YELLOW, ANSI_BLUE, ANSI_PURPLE, ANSI_CYAN]
+colors = [ANSI_RED, ANSI_BLUE, ANSI_PURPLE]
 
 
 def wr(text):
