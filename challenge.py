@@ -22,7 +22,7 @@ with open("utils/data/all_answers.csv") as f:
 with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
 
-EVENT_CHANCES = {"type_fast": 0.1, "cat": 0.1, "dog": 0.1, "eldritch": 0.1}
+EVENT_CHANCES = {"type_fast": 0.4, "cat": 0.1, "dog": 0.1, "eldritch": 0.1}
 ITEM_DROP = {"meat": 0.1, "Einstein's Dream": 0.05}
 
 
