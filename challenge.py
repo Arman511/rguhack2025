@@ -17,11 +17,9 @@ import time
 
 from shared import clear
 
-# with open("utils/data/all_answers.csv") as f:
-#     ANSWER_LIST = [line.strip() for line in f]
-ANSWER_LIST = [
-    "ocean",
-]
+with open("utils/data/all_answers.csv") as f:
+    ANSWER_LIST = [line.strip() for line in f]
+
 
 with open("utils/data/all_guess.csv") as f:
     GUESS_SET = {line.strip() for line in f}
