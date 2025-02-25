@@ -123,8 +123,9 @@ def console_challenge(player: Player):
 
         question = f"{num1} {operation} {num2}"
         answer = eval(question)
-        pygame.mixer.Sound("music/speed_timer_10s.mp3").play()
+        timer = pygame.mixer.Sound("music/speed_timer_10s.mp3")
         print(wrap_colour(ANSI_YELLOW, f"Solve: {question}"))
+        timer.play()
         start_time = time.time()
         user_answer = input(
             "Your answer(type exit to return to the corridor): "
@@ -132,7 +133,7 @@ def console_challenge(player: Player):
         if user_answer.lower() == "exit":
             return "EXIT"
         end_time = time.time()
-
+        timer.stop()
         if end_time - start_time > time_limit:
             print(
                 wrap_colour(
@@ -703,11 +704,12 @@ def type_fast_event(player: Player):
     chosen_action = random.choice(actions)
     print(wrap_colour(ANSI_BLUE, action_dialogues[chosen_action]["problem"]))
 
-    pygame.mixer.Sound("music/speed_timer_10s.mp3").play()
+    timer = pygame.mixer.Sound("music/speed_timer_10s.mp3")
+    timer.play()
     start_time = time.time()
     user_action = input("Your action: ").strip().lower()
     end_time = time.time()
-
+    timer.stop()
     if end_time - start_time > time_limit:
         print(
             wrap_colour(ANSI_RED, "Too slow! You fail to react, and disaster strikes.")
